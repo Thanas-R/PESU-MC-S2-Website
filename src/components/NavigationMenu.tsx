@@ -160,7 +160,9 @@ export const NavigationMenu = ({
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Wandering Trader</p>
                     <p className="text-foreground text-lg font-semibold">{adminPanel.webDev}</p>
-                    <p className="text-muted-foreground text-xs mt-1">Scripting, Website & Marketing]</p>
+                    <p className="text-muted-foreground text-xs mt-1">[Scripting, Website & Marketing]
+
+                </p>
                   </div>
                 </div>
               </motion.div>

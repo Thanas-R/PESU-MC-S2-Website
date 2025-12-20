@@ -6,56 +6,53 @@
 
 @layer base {
   :root {
-    --background: 220 20% 8%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 98%;
 
-    --card: 220 15% 12%;
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 10%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 220 15% 18%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 142 60% 50%;
+    --accent: 0 0% 25%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 142 70% 45%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
 
     --radius: 0.75rem;
 
-    /* Custom theme colors */
-    --emerald: 142 70% 45%;
-    --emerald-glow: 142 80% 55%;
+    /* Custom theme colors - Apple-style neutrals */
     --discord: 235 86% 65%;
     --discord-hover: 235 86% 58%;
-    --orange: 25 95% 53%;
+    --warning: 38 92% 50%;
     
-    /* Glass effects */
-    --glass-bg: 220 15% 12% / 0.6;
+    /* Glass effects - minimal */
+    --glass-bg: 0 0% 10% / 0.8;
     --glass-border: 0 0% 100% / 0.1;
-    --glass-blur: 20px;
 
-    --sidebar-background: 220 20% 8%;
+    --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 142 70% 45%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 220 15% 18%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 15% 20%;
-    --sidebar-ring: 142 70% 45%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 80%;
   }
 }
 
@@ -76,31 +73,15 @@
 
 @layer components {
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-white/10 shadow-xl;
-  }
-
-  .glass-dark {
-    @apply bg-background/70 backdrop-blur-xl border border-white/5;
+    @apply bg-card/80 backdrop-blur-sm border border-white/10 shadow-lg;
   }
 
   .glass-card {
-    @apply bg-card/50 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl;
+    @apply bg-card/90 backdrop-blur-sm border border-white/10 rounded-2xl shadow-xl;
   }
 
   .glass-button {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300;
-  }
-
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
-  }
-
-  .glow-emerald {
-    box-shadow: 0 0 40px hsl(var(--emerald) / 0.3), 0 0 80px hsl(var(--emerald) / 0.1);
-  }
-
-  .glow-discord {
-    box-shadow: 0 0 30px hsl(var(--discord) / 0.4);
+    @apply bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300;
   }
 }
 
@@ -115,34 +96,10 @@
   }
 }
 
-/* Scroll stack styles */
-.scroll-stack-scroller {
-  @apply h-screen overflow-y-auto overflow-x-hidden scrollbar-hide;
-}
-
-.scroll-stack-inner {
-  @apply relative;
-}
-
-.scroll-stack-card {
-  @apply w-full min-h-screen flex items-center justify-center;
-  transform-origin: top center;
-  will-change: transform, filter;
-}
-
-.scroll-stack-end {
-  @apply h-[50vh];
-}
-
 /* Custom animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
 }
 
 @keyframes slide-up {
@@ -152,10 +109,6 @@
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .animate-slide-up {

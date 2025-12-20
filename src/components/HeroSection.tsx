@@ -29,17 +29,17 @@ export const HeroSection = ({
   };
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="text-center max-w-4xl mx-auto">
+      <div className="text-center max-w-5xl mx-auto">
         {/* Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-10 tracking-tight text-foreground"
+          className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 tracking-tight text-foreground"
         >
           PESU Minecraft
-          <span className="block text-2xl md:text-4xl lg:text-5xl mt-2 font-light text-muted-foreground">
-            Season 2
+          <span className="block text-3xl md:text-4xl lg:text-5xl mt-3 font-light text-muted-foreground">
+            S2
           </span>
         </motion.h1>
 
@@ -51,15 +51,15 @@ export const HeroSection = ({
           className="flex flex-wrap justify-center gap-4 mb-10"
         >
           {/* Version Card */}
-          <div className="glass-card px-6 py-4 rounded-2xl">
+          <div className="glass-card px-8 py-5 rounded-2xl">
             <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">Version</p>
-            <p className="text-foreground text-lg font-semibold">1.21.11</p>
+            <p className="text-foreground text-xl font-semibold">1.21.11</p>
           </div>
 
           {/* IP Address Card */}
           <button
             onClick={handleCopyIP}
-            className="glass-card px-6 py-4 rounded-2xl group cursor-pointer hover:border-white/30 transition-all duration-300"
+            className="glass-card px-8 py-5 rounded-2xl group cursor-pointer hover:border-white/30 transition-all duration-300"
           >
             <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1 flex items-center gap-2">
               IP Address
@@ -69,8 +69,14 @@ export const HeroSection = ({
                 <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               )}
             </p>
-            <p className="text-foreground text-lg font-semibold font-mono">{serverIP}</p>
+            <p className="text-foreground text-xl font-semibold font-mono">{serverIP}</p>
           </button>
+
+          {/* Mode Card */}
+          <div className="glass-card px-8 py-5 rounded-2xl">
+            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-1">Mode</p>
+            <p className="text-foreground text-xl font-semibold">Survival</p>
+          </div>
         </motion.div>
 
         {/* Action Buttons */}
@@ -82,11 +88,16 @@ export const HeroSection = ({
         >
           {/* Server Status Button */}
           <a
-            href="https://pesu-mc.ddns.net:8443/status"
+            href="https://mcsrvstat.us/server/pesu-mc.ddns.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 glass-button rounded-2xl font-semibold text-foreground transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 glass-card rounded-2xl font-semibold text-foreground transition-all duration-300 hover:scale-105 hover:bg-white/20"
           >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
             Server Status
           </a>
 
@@ -106,7 +117,7 @@ export const HeroSection = ({
           {/* Server Contents Button */}
           <button
             onClick={onOpenServerContents}
-            className="inline-flex items-center gap-3 px-6 py-3 glass-button rounded-2xl font-semibold hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-3 px-6 py-3 glass-card rounded-2xl font-semibold hover:scale-105 hover:bg-white/20 transition-all duration-300"
           >
             Server Contents
           </button>

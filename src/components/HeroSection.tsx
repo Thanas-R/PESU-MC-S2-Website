@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
+import serverIcon from '@/assets/server-icon.png';
 import { toast } from '@/hooks/use-toast';
 interface HeroSectionProps {
   onOpenServerContents: () => void;
@@ -38,8 +39,9 @@ export const HeroSection = ({
           className="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-8 tracking-tight text-foreground"
         >
           PESU Minecraft
-          <span className="block text-3xl md:text-5xl lg:text-6xl mt-4 font-light text-muted-foreground">
+          <span className="flex items-center justify-center gap-3 text-3xl md:text-5xl lg:text-6xl mt-4 font-light text-muted-foreground">
             Season 2
+            <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />
           </span>
         </motion.h1>
 

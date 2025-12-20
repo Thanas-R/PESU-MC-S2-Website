@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { ServerContentsModal } from '@/components/ServerContentsModal';
@@ -6,10 +7,43 @@ import { HeroSection } from '@/components/HeroSection';
 import { FeaturesSection } from '@/components/FeaturesSection';
 import { HowToJoinSection } from '@/components/HowToJoinSection';
 import { GallerySection } from '@/components/GallerySection';
+import { LoadingScreen } from '@/components/LoadingScreen';
 import heroBg from '@/assets/hero-bg.png';
+import serverIcon from '@/assets/server-icon.png';
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServerContentsOpen, setIsServerContentsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Preload critical images
+    const imagesToLoad = [heroBg, serverIcon];
+    let loadedCount = 0;
+
+    const checkAllLoaded = () => {
+      loadedCount++;
+      if (loadedCount >= imagesToLoad.length) {
+        setIsLoading(false);
+      }
+    };
+
+    imagesToLoad.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      if (img.complete) {
+        checkAllLoaded();
+      } else {
+        img.onload = checkAllLoaded;
+        img.onerror = checkAllLoaded;
+      }
+    });
+
+    // Fallback: hide loader after 5 seconds max
+    const timeout = setTimeout(() => setIsLoading(false), 5000);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const handleNavigate = (section: string) => {
     const element = document.getElementById(section);
     if (element) {
@@ -18,13 +52,20 @@ const Index = () => {
       });
     }
   };
-  return <div className="relative min-h-screen">
+
+  return (
+    <div className="relative min-h-screen">
+      {/* Loading Screen */}
+      <AnimatePresence>
+        {isLoading && <LoadingScreen isLoading={isLoading} />}
+      </AnimatePresence>
+
       {/* Fixed Background - no blur */}
       <div className="fixed inset-0 z-0" style={{
-      backgroundImage: `url(${heroBg})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}>
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
         {/* Very subtle overlay for text readability */}
         <div className="absolute inset-0 bg-black/40" />
       </div>
@@ -36,9 +77,9 @@ const Index = () => {
 
       {/* Navigation Menu */}
       <NavigationMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} onNavigate={handleNavigate} onOpenServerContents={() => {
-      setIsMenuOpen(false);
-      setIsServerContentsOpen(true);
-    }} />
+        setIsMenuOpen(false);
+        setIsServerContentsOpen(true);
+      }} />
 
       {/* Server Contents Modal */}
       <ServerContentsModal isOpen={isServerContentsOpen} onClose={() => setIsServerContentsOpen(false)} />
@@ -53,6 +94,7 @@ const Index = () => {
         {/* Footer */}
         
       </main>
-    </div>;
+    </div>
+  );
 };
 export default Index;

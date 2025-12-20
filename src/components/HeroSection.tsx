@@ -17,14 +17,16 @@ export const HeroSection = ({
       setCopied(true);
       toast({
         title: "IP Copied!",
-        description: `${serverIP} has been copied to your clipboard.`
+        description: `${serverIP} has been copied to your clipboard.`,
+        duration: 2000
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast({
         title: "Failed to copy",
         description: "Please copy manually: " + serverIP,
-        variant: "destructive"
+        variant: "destructive",
+        duration: 2000
       });
     }
   };

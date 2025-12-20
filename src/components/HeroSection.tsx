@@ -40,8 +40,8 @@ export const HeroSection = ({
         >
           PESU Minecraft
           <span className="flex items-center justify-center gap-3 text-3xl md:text-5xl lg:text-6xl mt-4 font-light text-muted-foreground">
-            Season 2
             <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />
+            Season 2
           </span>
         </motion.h1>
 
@@ -73,12 +73,6 @@ export const HeroSection = ({
             </p>
             <p className="text-foreground text-2xl font-semibold font-mono">{serverIP}</p>
           </button>
-
-          {/* Mode Card */}
-          <div className="glass-card px-10 py-6 rounded-2xl">
-            <p className="text-muted-foreground text-sm uppercase tracking-widest mb-2">Mode</p>
-            <p className="text-foreground text-2xl font-semibold">Survival</p>
-          </div>
         </motion.div>
 
         {/* Action Buttons */}

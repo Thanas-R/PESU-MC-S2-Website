@@ -37,6 +37,7 @@ const duelsCommands = [{
   cmd: '/duel leaderboard',
   desc: 'View the duel leaderboard'
 }];
+
 const partyCommands = [{
   cmd: '/party create',
   desc: 'Creates a new party'
@@ -54,6 +55,56 @@ const partyCommands = [{
   desc: 'Challenges another party leader to a party vs. party match'
 }];
 
+const teamCommands = [{
+  cmd: '/tc, /teamchat, /tchat',
+  desc: 'Sends a message to only the members of your current team'
+}, {
+  cmd: '/ac, /allychat',
+  desc: 'Sends a message to all members of your team and any allied teams'
+}, {
+  cmd: '/team create <name>',
+  desc: 'Creates a new team if you are not already in one'
+}, {
+  cmd: '/team disband',
+  desc: 'Destroys your team (only usable by the team owner)'
+}, {
+  cmd: '/team leave',
+  desc: 'Removes you from your current team'
+}, {
+  cmd: '/team invite <player>',
+  desc: 'Invites a player to your team'
+}, {
+  cmd: '/team join <team-name>',
+  desc: 'Joins a team you have been invited to'
+}, {
+  cmd: '/team kick <player>',
+  desc: 'Kicks a player from your team'
+}, {
+  cmd: '/team info',
+  desc: 'Displays information about your current team'
+}, {
+  cmd: '/team list',
+  desc: 'Lists all teams on the server'
+}, {
+  cmd: '/team prefix <prefix>',
+  desc: "Changes the prefix for your team's name in chat"
+}, {
+  cmd: '/team ally [add/remove] <team-name>',
+  desc: 'Adds or removes an allied team'
+}, {
+  cmd: '/team enemy [add/remove] <team-name>',
+  desc: 'Adds or removes an enemy team'
+}, {
+  cmd: '/team pvp',
+  desc: 'Toggles the friendly fire status for your team'
+}, {
+  cmd: '/team [promote/demote] <player>',
+  desc: 'Promotes or demotes a team member to/from team manager'
+}, {
+  cmd: '/team permission [add/remove] <permission>',
+  desc: 'Adds or removes a permission for team managers to use specific team commands'
+}];
+
 export const ServerContentsModal = ({
   isOpen,
   onClose
@@ -67,7 +118,7 @@ export const ServerContentsModal = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-black/20 backdrop-blur-md"
             onClick={onClose}
           />
 
@@ -75,7 +126,7 @@ export const ServerContentsModal = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed inset-4 md:inset-8 lg:inset-12 z-50 glass-card overflow-hidden flex flex-col"
+            className="fixed inset-8 md:inset-16 lg:inset-24 z-50 bg-black/30 backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
           >
             <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10">
               <h2 className="text-2xl md:text-3xl font-bold">Server Contents</h2>
@@ -121,7 +172,7 @@ export const ServerContentsModal = ({
               {activeTab === 'plugins' && (
                 <div className="space-y-6 max-w-3xl mx-auto">
                   {/* Duels Plugin */}
-                  <div className="glass p-6 rounded-2xl">
+                  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
                     <div className="mb-6">
                       <a
                         href="https://modrinth.com/plugin/duels-optimised"
@@ -170,8 +221,26 @@ export const ServerContentsModal = ({
                     </div>
                   </div>
 
+                  {/* Better Teams Plugin */}
+                  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-foreground">Better Teams Plugin</h3>
+                      <p className="text-muted-foreground mt-2">
+                        Create and manage teams for collaborative gameplay. Form alliances, declare enemies, and coordinate with your teammates.
+                      </p>
+                    </div>
 
-                  <div className="glass p-4 rounded-xl text-center">
+                    <div className="grid gap-2">
+                      {teamCommands.map(cmd => (
+                        <div key={cmd.cmd} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-2 px-3 rounded-lg bg-white/5">
+                          <code className="text-foreground font-mono text-sm">{cmd.cmd}</code>
+                          <span className="text-muted-foreground text-sm">{cmd.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-white/5 border border-white/10 p-4 rounded-xl text-center">
                     <p className="text-muted-foreground text-sm">
                       Need help? Ask in our{' '}
                       <a href="https://discord.com/invite/dVGj9pfG" className="text-foreground hover:underline">

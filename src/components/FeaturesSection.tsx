@@ -55,17 +55,17 @@ const serverInfo = [
 
 export const FeaturesSection = () => {
   return (
-    <section id="features" className="min-h-screen flex items-center justify-center py-20 px-4">
-      <div className="max-w-6xl mx-auto w-full">
+    <section id="features" className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Server <span className="text-primary">Features</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            Server Features
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Experience Minecraft like never before with our curated selection of plugins and customizations
@@ -78,13 +78,13 @@ export const FeaturesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
           viewport={{ once: true }}
-          className="glass-card p-6 rounded-3xl mb-12 overflow-x-auto"
+          className="glass-card p-6 rounded-2xl mb-16"
         >
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-            {serverInfo.map((info, index) => (
-              <div key={info.label} className="text-center min-w-[120px]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {serverInfo.map((info) => (
+              <div key={info.label} className="text-center">
                 <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">{info.label}</p>
-                <p className="text-foreground font-semibold">{info.value}</p>
+                <p className="text-foreground font-semibold text-sm">{info.value}</p>
               </div>
             ))}
           </div>
@@ -97,12 +97,12 @@ export const FeaturesSection = () => {
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.05, duration: 0.5 }}
               viewport={{ once: true }}
-              className="glass p-6 rounded-2xl group hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              className="glass p-6 rounded-2xl group hover:border-white/20 transition-all duration-300"
             >
-              <feature.icon className="w-10 h-10 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+              <feature.icon className="w-8 h-8 text-foreground mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </motion.div>
           ))}

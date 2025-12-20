@@ -126,7 +126,7 @@ export const ServerContentsModal = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed top-8 bottom-8 left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 bg-black/30 backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[85vh] z-50 bg-black/30 backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
           >
             <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10">
               <h2 className="text-2xl md:text-3xl font-bold">Server Contents</h2>

@@ -15,7 +15,7 @@ const features = [
   {
     icon: Map,
     title: 'Massive World',
-    description: '50k x 50k blocks world border to explore',
+    description: '50k x 50k blocks with 90+ new structures to explore',
   },
   {
     icon: Swords,

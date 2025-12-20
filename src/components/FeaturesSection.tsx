@@ -39,7 +39,7 @@ const features = [
   },
   {
     icon: Skull,
-    title: 'Hardcore PvP',
+    title: 'Enhanced Combat',
     description: 'Combat logging protection & player head drops',
   },
 ];
@@ -47,10 +47,10 @@ const features = [
 const serverInfo = [
   { label: 'Platform', value: 'Google Cloud (Java)' },
   { label: 'Version', value: '1.21.11' },
-  { label: 'Server Software', value: 'PaperMC / Fabric' },
+  { label: 'Software', value: 'PaperMC / Fabric' },
   { label: 'Mode', value: 'Survival' },
   { label: 'Difficulty', value: 'Hard' },
-  { label: 'Cracked Access', value: 'Enabled' },
+  { label: 'Cracked', value: 'Enabled' },
 ];
 
 export const FeaturesSection = () => {

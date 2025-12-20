@@ -73,15 +73,15 @@
 
 @layer components {
   .glass {
-    @apply bg-card/80 backdrop-blur-sm border border-white/10 shadow-lg;
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg;
   }
 
   .glass-card {
-    @apply bg-card/90 backdrop-blur-sm border border-white/10 rounded-2xl shadow-xl;
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl;
   }
 
   .glass-button {
-    @apply bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300;
+    @apply bg-white/15 backdrop-blur-md border border-white/25 hover:bg-white/25 transition-all duration-300;
   }
 }
 

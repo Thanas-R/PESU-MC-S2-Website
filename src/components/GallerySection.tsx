@@ -9,6 +9,10 @@ import cathedral from '@/assets/gallery/cathedral.png';
 import desertPlayer from '@/assets/gallery/desert-player.png';
 import lushCave from '@/assets/gallery/lush-cave.png';
 import cherryRain from '@/assets/gallery/cherry-rain.png';
+import nightStars from '@/assets/gallery/night-stars.png';
+import forestMist from '@/assets/gallery/forest-mist.png';
+import endDimension from '@/assets/gallery/end-dimension.png';
+import mountainLake from '@/assets/gallery/mountain-lake.png';
 
 const galleryItems = [
   { id: 1, url: cherryVillage, title: 'Cherry Blossom Village' },
@@ -18,6 +22,10 @@ const galleryItems = [
   { id: 5, url: desertPlayer, title: 'Desert Exploration' },
   { id: 6, url: lushCave, title: 'Lush Cave Discovery' },
   { id: 7, url: cherryRain, title: 'Cherry Rain Romance' },
+  { id: 8, url: nightStars, title: 'Starry Night' },
+  { id: 9, url: forestMist, title: 'Misty Forest Morning' },
+  { id: 10, url: endDimension, title: 'The End Dimension' },
+  { id: 11, url: mountainLake, title: 'Mountain Lake Vista' },
 ];
 
 const FULL_WIDTH_PX = 120;

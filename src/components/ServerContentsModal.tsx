@@ -53,11 +53,6 @@ const partyCommands = [{
   cmd: '/party duel <leader>',
   desc: 'Challenges another party leader to a party vs. party match'
 }];
-const tpaCommands = [
-  { cmd: '/tpa <player>', desc: 'Request to teleport to a player' },
-  { cmd: '/tpa accept', desc: 'Accept a teleport request' },
-  { cmd: '/tpa deny', desc: 'Deny a teleport request' },
-];
 
 export const ServerContentsModal = ({
   isOpen,
@@ -175,21 +170,6 @@ export const ServerContentsModal = ({
                     </div>
                   </div>
 
-                  {/* TPA Plugin */}
-                  <div className="glass p-6 rounded-2xl">
-                    <h3 className="text-2xl font-bold mb-2">Teleportation</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Request to teleport to other players on the server.
-                    </p>
-                    <div className="grid gap-2">
-                      {tpaCommands.map(cmd => (
-                        <div key={cmd.cmd} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-2 px-3 rounded-lg bg-white/5">
-                          <code className="text-foreground font-mono text-sm">{cmd.cmd}</code>
-                          <span className="text-muted-foreground text-sm">{cmd.desc}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
 
                   <div className="glass p-4 rounded-xl text-center">
                     <p className="text-muted-foreground text-sm">

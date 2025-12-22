@@ -15,9 +15,9 @@ export const HeroSection = ({
   const serverIP = 'pesu-mc.ddns.net';
 
   // Placeholder values - will be replaced with API data later
-  const isOnline = true;
-  const playerCount = 5;
-  const maxPlayers = 20;
+  const isOnline = false;
+  const playerCount = 0;
+  const maxPlayers = 100;
 
   const handleCopyIP = async () => {
     try {
@@ -42,25 +42,11 @@ export const HeroSection = ({
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
       <div className="text-center max-w-6xl mx-auto w-full">
-        {/* Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 sm:mb-8 tracking-tight text-foreground"
-        >
-          PESU Minecraft
-          <span className="flex items-center justify-center gap-2 sm:gap-3 text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 font-light text-muted-foreground">
-            Season 2
-            <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />
-          </span>
-        </motion.h1>
-
-        {/* Server Status + Player Count */}
+        {/* Server Status + Player Count - ABOVE Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
+          transition={{ duration: 0.4 }}
           className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
         >
           {/* Server Status */}
@@ -84,6 +70,20 @@ export const HeroSection = ({
           </div>
         </motion.div>
 
+        {/* Main Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 sm:mb-8 tracking-tight text-foreground"
+        >
+          PESU Minecraft
+          <span className="flex items-center justify-center gap-2 sm:gap-3 text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 font-light text-muted-foreground">
+            Season 2
+            <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />
+          </span>
+        </motion.h1>
+
         {/* Info Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -91,30 +91,30 @@ export const HeroSection = ({
           transition={{ delay: 0.3, duration: 0.4 }}
           className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-5 mb-8 sm:mb-10"
         >
-          {/* Version Card */}
-          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl">
+          {/* Version Card - fixed hover blink */}
+          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/25">
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2">Version</p>
             <p className="text-foreground text-xl sm:text-2xl font-semibold">1.21.11</p>
           </div>
 
-          {/* IP Address Card */}
+          {/* IP Address Card - fixed hover */}
           <button
             onClick={handleCopyIP}
-            className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer hover:border-white/30 transition-all duration-200"
+            className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer transition-colors duration-200 hover:border-white/25"
           >
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2 flex items-center justify-center sm:justify-start gap-2">
               IP Address
               {copied ? (
                 <Check className="w-4 h-4 text-foreground" />
               ) : (
-                <Copy className="w-4 h-4 opacity-50 sm:opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Copy className="w-4 h-4 opacity-50 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               )}
             </p>
             <p className="text-foreground text-lg sm:text-2xl font-semibold font-mono">{serverIP}</p>
           </button>
 
-          {/* Mode Card */}
-          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl">
+          {/* Mode Card - fixed hover blink */}
+          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/25">
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2">Mode</p>
             <p className="text-foreground text-xl sm:text-2xl font-semibold">Survival</p>
           </div>

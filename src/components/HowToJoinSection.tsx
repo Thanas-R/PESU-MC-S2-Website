@@ -31,14 +31,15 @@ export const HowToJoinSection = () => {
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{
         opacity: 0,
-        y: 30
+        y: 20
       }} whileInView={{
         opacity: 1,
         y: 0
       }} transition={{
-        duration: 0.6
+        duration: 0.3
       }} viewport={{
-        once: true
+        once: true,
+        amount: 0.3
       }} className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             How to Join
@@ -60,10 +61,11 @@ export const HowToJoinSection = () => {
           opacity: 1,
           x: 0
         }} transition={{
-          delay: index * 0.1,
-          duration: 0.5
+          delay: index * 0.05,
+          duration: 0.3
         }} viewport={{
-          once: true
+          once: true,
+          amount: 0.2
         }} className="glass p-6 rounded-2xl flex items-start gap-6 hover:border-white/20 transition-all duration-300">
               <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
                 <step.icon className="w-6 h-6 text-foreground" />
@@ -81,15 +83,16 @@ export const HowToJoinSection = () => {
         {/* Join Discord CTA */}
         <motion.div initial={{
         opacity: 0,
-        y: 20
+        y: 15
       }} whileInView={{
         opacity: 1,
         y: 0
       }} transition={{
-        delay: 0.6,
-        duration: 0.5
+        delay: 0.2,
+        duration: 0.3
       }} viewport={{
-        once: true
+        once: true,
+        amount: 0.3
       }} className="text-center mt-12">
           <a href="https://discord.com/invite/dVGj9pfG" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-[hsl(235,86%,65%)] hover:bg-[hsl(235,86%,58%)] rounded-2xl font-semibold text-lg text-white transition-all duration-300 hover:scale-105">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">

@@ -156,9 +156,9 @@ export const GallerySection = () => {
     <section id="gallery" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.25 }}
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-8 sm:mb-12"
         >
@@ -171,10 +171,10 @@ export const GallerySection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.05, duration: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="glass-card p-3 sm:p-4 rounded-2xl"
         >
           <div className="flex flex-col gap-3 sm:gap-4">

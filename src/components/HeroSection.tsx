@@ -79,7 +79,7 @@ export const HeroSection = ({
         >
           PESU Minecraft
           <span className="flex items-center justify-center gap-2 sm:gap-3 text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 font-light text-muted-foreground">
-            SEASSON 2
+            SEASON 2
             <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />
           </span>
         </motion.h1>

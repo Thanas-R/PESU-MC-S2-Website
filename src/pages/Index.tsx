@@ -8,6 +8,7 @@ import { FeaturesSection } from '@/components/FeaturesSection';
 import { HowToJoinSection } from '@/components/HowToJoinSection';
 import { GallerySection } from '@/components/GallerySection';
 import { LoadingScreen } from '@/components/LoadingScreen';
+import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import heroBg from '@/assets/hero-bg.png';
 import serverIcon from '@/assets/server-icon.png';
 
@@ -15,6 +16,9 @@ const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServerContentsOpen, setIsServerContentsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Smooth scroll only on desktop
+  useSmoothScroll();
 
   useEffect(() => {
     // Preload critical images

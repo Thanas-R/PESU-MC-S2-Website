@@ -51,11 +51,11 @@ export const NavigationMenu = ({
 
           {/* Menu Content - Full screen on mobile */}
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
+            initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 sm:inset-6 md:inset-12 lg:inset-20 z-50 bg-background sm:bg-black/30 sm:backdrop-blur-xl sm:border sm:border-white/15 sm:rounded-2xl overflow-auto"
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="fixed inset-0 sm:inset-6 md:inset-12 lg:inset-20 z-50 bg-background/95 sm:bg-black/30 backdrop-blur-md sm:backdrop-blur-xl sm:border sm:border-white/15 sm:rounded-2xl overflow-auto"
           >
             {/* Close button - visible on mobile */}
             <button

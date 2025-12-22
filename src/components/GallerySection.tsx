@@ -139,10 +139,12 @@ export const GallerySection = () => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.offsetWidth || 1;
       const targetX = -index * containerWidth;
+      // Faster, snappier animation
       animate(x, targetX, {
         type: 'spring',
-        stiffness: isMobile ? 400 : 300,
-        damping: isMobile ? 40 : 30
+        stiffness: 500,
+        damping: 50,
+        mass: 0.8
       });
     }
   }, [index, x, isMobile]);
@@ -154,9 +156,9 @@ export const GallerySection = () => {
     <section id="gallery" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-8 sm:mb-12"
         >
@@ -169,9 +171,9 @@ export const GallerySection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
           viewport={{ once: true, amount: 0.3 }}
           className="glass-card p-3 sm:p-4 rounded-2xl"
         >

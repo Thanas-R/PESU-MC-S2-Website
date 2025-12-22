@@ -128,31 +128,34 @@ export const ServerContentsModal = ({
           />
 
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-2 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-background sm:bg-black/80 sm:backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-background/95 sm:bg-black/80 backdrop-blur-md sm:backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
           >
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
+            {/* Header with proper spacing */}
+            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 shrink-0">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Server Contents</h2>
-              <button onClick={onClose} className="p-2 rounded-full glass-button">
+              <button onClick={onClose} className="p-2 rounded-full glass-button shrink-0">
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
-            {/* Tabs - scrollable on mobile */}
-            <div className="flex gap-2 p-3 sm:p-4 border-b border-white/10 overflow-x-auto scrollbar-hide">
+            {/* Tabs - horizontal scroll with proper sizing */}
+            <div className="flex gap-2 sm:gap-3 p-3 sm:p-4 border-b border-white/10 overflow-x-auto scrollbar-hide shrink-0">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl font-medium transition-all duration-300 whitespace-nowrap text-sm sm:text-base ${
-                    activeTab === tab.id ? 'bg-foreground text-background' : 'glass-button'
+                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-medium transition-all duration-200 whitespace-nowrap text-sm sm:text-base shrink-0 ${
+                    activeTab === tab.id 
+                      ? 'bg-foreground text-background' 
+                      : 'bg-white/10 border border-white/20 hover:bg-white/15'
                   }`}
                 >
-                  <tab.icon className="w-4 h-4" />
-                  {tab.label}
+                  <tab.icon className="w-4 h-4 shrink-0" />
+                  <span>{tab.label}</span>
                 </button>
               ))}
             </div>

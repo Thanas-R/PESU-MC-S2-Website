@@ -132,7 +132,7 @@ export const ServerContentsModal = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-background/95 sm:bg-black/80 backdrop-blur-md sm:backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header with proper spacing */}
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 shrink-0">
@@ -180,8 +180,8 @@ export const ServerContentsModal = ({
 
               {activeTab === 'plugins' && (
                 <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
-                  {/* Duels Plugin */}
-                  <div className="bg-white/5 border border-white/10 p-4 sm:p-6 rounded-2xl">
+                  {/* Duels Plugin - lighter glass effect */}
+                  <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
                     <div className="mb-4 sm:mb-6">
                       <a
                         href="https://modrinth.com/plugin/duels-optimised"
@@ -205,7 +205,7 @@ export const ServerContentsModal = ({
                       </p>
                       <div className="grid gap-2">
                         {duelsCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/5">
+                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                             <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                             <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
                           </div>
@@ -221,7 +221,7 @@ export const ServerContentsModal = ({
                       </p>
                       <div className="grid gap-2">
                         {partyCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/5">
+                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                             <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                             <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
                           </div>
@@ -230,8 +230,8 @@ export const ServerContentsModal = ({
                     </div>
                   </div>
 
-                  {/* Better Teams Plugin */}
-                  <div className="bg-white/5 border border-white/10 p-4 sm:p-6 rounded-2xl">
+                  {/* Better Teams Plugin - lighter glass effect */}
+                  <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
                     <div className="mb-4 sm:mb-6">
                       <h3 className="text-xl sm:text-2xl font-bold text-foreground">Better Teams Plugin</h3>
                       <p className="text-muted-foreground mt-2 text-sm sm:text-base">
@@ -241,7 +241,7 @@ export const ServerContentsModal = ({
 
                     <div className="grid gap-2">
                       {teamCommands.map(cmd => (
-                        <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/5">
+                        <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                           <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                           <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
                         </div>
@@ -249,7 +249,7 @@ export const ServerContentsModal = ({
                     </div>
                   </div>
 
-                  <div className="bg-white/5 border border-white/10 p-3 sm:p-4 rounded-xl text-center">
+                  <div className="bg-white/10 border border-white/15 p-3 sm:p-4 rounded-xl text-center backdrop-blur-sm">
                     <p className="text-muted-foreground text-xs sm:text-sm">
                       Need help? Ask in our{' '}
                       <a href="https://discord.com/invite/dVGj9pfG" className="text-foreground hover:underline">

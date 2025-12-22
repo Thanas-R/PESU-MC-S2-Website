@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface NavigationMenuProps {
   isOpen: boolean;
@@ -117,18 +117,18 @@ export const NavigationMenu = ({
                     Join Discord
                   </motion.a>
 
-                  <motion.a
+                  {/* Server Status Widget - same as hero */}
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    href="https://pesu-mc.ddns.net:8443/status"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-button rounded-xl font-semibold text-sm sm:text-base"
+                    className="inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-red-500/20 border border-red-500/40 rounded-xl"
                   >
-                    <ExternalLink className="w-4 h-4" />
-                    Server Status
-                  </motion.a>
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                    <span className="font-semibold text-red-400 text-sm sm:text-base">Server Offline</span>
+                    <span className="text-muted-foreground text-sm">•</span>
+                    <span className="text-muted-foreground text-sm sm:text-base">0/100</span>
+                  </motion.div>
                 </div>
               </div>
 

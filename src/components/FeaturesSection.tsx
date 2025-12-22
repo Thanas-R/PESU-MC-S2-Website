@@ -58,9 +58,9 @@ export const FeaturesSection = () => {
     <section id="features" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-12 sm:mb-16"
         >
@@ -74,9 +74,9 @@ export const FeaturesSection = () => {
 
         {/* Server Info Bar */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
           viewport={{ once: true, amount: 0.3 }}
           className="glass-card p-4 sm:p-6 rounded-2xl mb-12 sm:mb-16"
         >
@@ -95,13 +95,13 @@ export const FeaturesSection = () => {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.03, duration: 0.4 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="glass p-4 sm:p-6 rounded-2xl group hover:border-white/20 transition-all duration-300"
+              transition={{ delay: index * 0.02, duration: 0.25 }}
+              viewport={{ once: true, amount: 0.1 }}
+              className="glass p-4 sm:p-6 rounded-2xl group hover:border-white/20 transition-colors duration-200"
             >
-              <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-foreground mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-foreground mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-base sm:text-lg font-semibold mb-1.5 sm:mb-2 text-foreground">{feature.title}</h3>
               <p className="text-muted-foreground text-xs sm:text-sm">{feature.description}</p>
             </motion.div>

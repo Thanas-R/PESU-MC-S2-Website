@@ -132,29 +132,29 @@ export const ServerContentsModal = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-2xl md:h-fit md:max-h-[85vh] z-50 bg-black/20 backdrop-blur-2xl border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
-            {/* Header with proper spacing */}
-            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 shrink-0">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Server Contents</h2>
-              <button onClick={onClose} className="p-2 rounded-full glass-button shrink-0">
+            {/* Header */}
+            <div className="flex items-center justify-between p-5 sm:p-6 border-b border-white/15 shrink-0">
+              <h2 className="text-2xl sm:text-3xl font-bold">Server Contents</h2>
+              <button onClick={onClose} className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-colors shrink-0">
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
-            {/* Tabs - horizontal scroll with proper sizing */}
-            <div className="flex gap-2 sm:gap-3 p-3 sm:p-4 border-b border-white/10 overflow-x-auto scrollbar-hide shrink-0">
+            {/* Tabs */}
+            <div className="flex gap-3 p-4 sm:p-5 border-b border-white/15 overflow-x-auto scrollbar-hide shrink-0">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-medium transition-all duration-200 whitespace-nowrap text-sm sm:text-base shrink-0 ${
+                  className={`flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full font-semibold transition-all duration-200 whitespace-nowrap text-sm sm:text-base shrink-0 ${
                     activeTab === tab.id 
                       ? 'bg-foreground text-background' 
-                      : 'bg-white/10 border border-white/20 hover:bg-white/15'
+                      : 'bg-white/15 border border-white/25 hover:bg-white/25'
                   }`}
                 >
-                  <tab.icon className="w-4 h-4 shrink-0" />
+                  <tab.icon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                   <span>{tab.label}</span>
                 </button>
               ))}
@@ -179,35 +179,35 @@ export const ServerContentsModal = ({
               )}
 
               {activeTab === 'plugins' && (
-                <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
-                  {/* Duels Plugin - lighter glass effect */}
-                  <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
-                    <div className="mb-4 sm:mb-6">
+                <div className="space-y-6 max-w-3xl mx-auto">
+                  {/* Duels Plugin */}
+                  <div className="bg-white/15 border border-white/25 p-5 sm:p-8 rounded-2xl">
+                    <div className="mb-6">
                       <a
                         href="https://modrinth.com/plugin/duels-optimised"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-foreground hover:text-muted-foreground transition-colors"
+                        className="inline-flex items-center gap-2.5 text-xl sm:text-2xl font-bold text-foreground hover:text-muted-foreground transition-colors"
                       >
                         Duels Plugin
-                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <ExternalLink className="w-5 h-5" />
                       </a>
-                      <p className="text-muted-foreground mt-2 text-sm sm:text-base">
+                      <p className="text-muted-foreground mt-3 text-sm sm:text-base leading-relaxed">
                         Challenge other players to 1v1 duels or team battles. Track your stats and compete for the top position on the leaderboard.
                       </p>
                     </div>
 
                     {/* 1v1 Duels Section */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-foreground">1v1 Duels</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">
-                        Challenge someone with <code className="text-foreground bg-white/10 px-1.5 py-0.5 rounded text-xs">/duel &lt;player&gt;</code> or use <code className="text-foreground bg-white/10 px-1.5 py-0.5 rounded text-xs">/duel queue</code> to find a random opponent.
+                    <div className="mb-6">
+                      <h4 className="text-lg sm:text-xl font-bold mb-3 text-foreground">1v1 Duels</h4>
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                        Challenge someone with <code className="text-foreground bg-white/20 px-2 py-1 rounded font-mono text-xs">/duel &lt;player&gt;</code> or use <code className="text-foreground bg-white/20 px-2 py-1 rounded font-mono text-xs">/duel queue</code> to find a random opponent.
                       </p>
-                      <div className="grid gap-2">
+                      <div className="grid gap-2.5">
                         {duelsCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
-                            <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
-                            <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
+                          <div key={cmd.cmd} className="flex items-start gap-4 py-3 px-4 rounded-xl bg-white/10 border border-white/15">
+                            <code className="text-foreground font-mono text-sm shrink-0 font-medium">{cmd.cmd}</code>
+                            <span className="text-muted-foreground text-sm">{cmd.desc}</span>
                           </div>
                         ))}
                       </div>
@@ -215,44 +215,44 @@ export const ServerContentsModal = ({
 
                     {/* Party Duels Section */}
                     <div>
-                      <h4 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-foreground">Party Duels</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">
+                      <h4 className="text-lg sm:text-xl font-bold mb-3 text-foreground">Party Duels</h4>
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                         Create parties for group activities and team-based duels. Perfect for coordinating with multiple players.
                       </p>
-                      <div className="grid gap-2">
+                      <div className="grid gap-2.5">
                         {partyCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
-                            <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
-                            <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
+                          <div key={cmd.cmd} className="flex items-start gap-4 py-3 px-4 rounded-xl bg-white/10 border border-white/15">
+                            <code className="text-foreground font-mono text-sm shrink-0 font-medium">{cmd.cmd}</code>
+                            <span className="text-muted-foreground text-sm">{cmd.desc}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
 
-                  {/* Better Teams Plugin - lighter glass effect */}
-                  <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
-                    <div className="mb-4 sm:mb-6">
+                  {/* Better Teams Plugin */}
+                  <div className="bg-white/15 border border-white/25 p-5 sm:p-8 rounded-2xl">
+                    <div className="mb-6">
                       <h3 className="text-xl sm:text-2xl font-bold text-foreground">Better Teams Plugin</h3>
-                      <p className="text-muted-foreground mt-2 text-sm sm:text-base">
+                      <p className="text-muted-foreground mt-3 text-sm sm:text-base leading-relaxed">
                         Create and manage teams for collaborative gameplay. Form alliances, declare enemies, and coordinate with your teammates.
                       </p>
                     </div>
 
-                    <div className="grid gap-2">
+                    <div className="grid gap-2.5">
                       {teamCommands.map(cmd => (
-                        <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
-                          <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
-                          <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
+                        <div key={cmd.cmd} className="flex items-start gap-4 py-3 px-4 rounded-xl bg-white/10 border border-white/15">
+                          <code className="text-foreground font-mono text-sm shrink-0 font-medium">{cmd.cmd}</code>
+                          <span className="text-muted-foreground text-sm">{cmd.desc}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="bg-white/10 border border-white/15 p-3 sm:p-4 rounded-xl text-center backdrop-blur-sm">
-                    <p className="text-muted-foreground text-xs sm:text-sm">
+                  <div className="bg-white/15 border border-white/25 p-4 sm:p-5 rounded-xl text-center">
+                    <p className="text-muted-foreground text-sm">
                       Need help? Ask in our{' '}
-                      <a href="https://discord.com/invite/dVGj9pfG" className="text-foreground hover:underline">
+                      <a href="https://discord.com/invite/dVGj9pfG" className="text-foreground hover:underline font-medium">
                         Discord community
                       </a>{' '}
                       or contact a staff member in-game!

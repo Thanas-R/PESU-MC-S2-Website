@@ -116,7 +116,7 @@ export const NavigationMenu = ({
                     Join Discord
                   </motion.a>
 
-                  <motion.a initial={{
+                  <motion.div initial={{
                 opacity: 0,
                 y: 10
               }} animate={{
@@ -124,10 +124,10 @@ export const NavigationMenu = ({
                 y: 0
               }} transition={{
                 delay: 0.3
-              }} href="https://pesu-mc.ddns.net:8443/status" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-button rounded-xl font-semibold text-sm sm:text-base">
-                    
-                    Server Status
-                  </motion.a>
+              }} className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-button rounded-xl font-semibold text-sm sm:text-base">
+                    <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                    <span>Offline</span>
+                  </motion.div>
                 </div>
               </div>
 

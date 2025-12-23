@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, animate } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import cherryVillage from '@/assets/gallery/cherry-village.png';
 import teamPhoto from '@/assets/gallery/team-photo.png';
 import birthdayCake from '@/assets/gallery/birthday-cake.png';
@@ -13,51 +11,19 @@ import forestMist from '@/assets/gallery/forest-mist.png';
 import endDimension from '@/assets/gallery/end-dimension.png';
 import mountainLake from '@/assets/gallery/mountain-lake.png';
 
-const galleryItems = [{
-  id: 1,
-  url: cherryVillage,
-  title: 'Cherry Blossom Village'
-}, {
-  id: 2,
-  url: teamPhoto,
-  title: 'Team Photo'
-}, {
-  id: 3,
-  url: birthdayCake,
-  title: '1 Year Anniversary'
-}, {
-  id: 4,
-  url: cathedral,
-  title: 'Gothic Cathedral'
-}, {
-  id: 5,
-  url: desertPlayer,
-  title: 'Desert Exploration'
-}, {
-  id: 6,
-  url: lushCave,
-  title: 'Lush Cave Discovery'
-}, {
-  id: 7,
-  url: cherryRain,
-  title: 'Cherry Rain Romance'
-}, {
-  id: 8,
-  url: nightStars,
-  title: 'Starry Night'
-}, {
-  id: 9,
-  url: forestMist,
-  title: 'Misty Forest Morning'
-}, {
-  id: 10,
-  url: endDimension,
-  title: 'The End Dimension'
-}, {
-  id: 11,
-  url: mountainLake,
-  title: 'Mountain Lake Vista'
-}];
+const galleryItems = [
+  { id: 1, url: cherryVillage, title: 'Cherry Blossom Village' },
+  { id: 2, url: teamPhoto, title: 'Team Photo' },
+  { id: 3, url: birthdayCake, title: '1 Year Anniversary' },
+  { id: 4, url: cathedral, title: 'Gothic Cathedral' },
+  { id: 5, url: desertPlayer, title: 'Desert Exploration' },
+  { id: 6, url: lushCave, title: 'Lush Cave Discovery' },
+  { id: 7, url: cherryRain, title: 'Cherry Rain Romance' },
+  { id: 8, url: nightStars, title: 'Starry Night' },
+  { id: 9, url: forestMist, title: 'Misty Forest Morning' },
+  { id: 10, url: endDimension, title: 'The End Dimension' },
+  { id: 11, url: mountainLake, title: 'Mountain Lake Vista' },
+];
 
 const FULL_WIDTH_PX = 100;
 const COLLAPSED_WIDTH_PX = 30;
@@ -92,20 +58,17 @@ function Thumbnails({
 
   return (
     <div ref={thumbnailsRef} className="overflow-x-auto scrollbar-hide">
-      <div
-        className="flex gap-0.5 h-16 sm:h-20 pb-2"
-        style={{ width: 'fit-content' }}
-      >
+      <div className="flex gap-0.5 h-16 sm:h-20 pb-2" style={{ width: 'fit-content' }}>
         {galleryItems.map((item, i) => (
           <button
             key={item.id}
             onClick={() => setIndex(i)}
-            className={`relative shrink-0 h-full overflow-hidden rounded-lg transition-all duration-300 ${
+            className={`relative shrink-0 h-full overflow-hidden rounded-lg transition-all duration-200 ${
               i === index ? 'w-[100px]' : 'w-[30px]'
             }`}
             style={{
               marginLeft: i === index ? MARGIN_PX : 0,
-              marginRight: i === index ? MARGIN_PX : 0
+              marginRight: i === index ? MARGIN_PX : 0,
             }}
           >
             <img
@@ -122,32 +85,59 @@ function Thumbnails({
   );
 }
 
+// Simple chevron icons
+const ChevronLeft = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m15 18-6-6 6-6"/>
+  </svg>
+);
+
+const ChevronRight = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+);
+
 export const GallerySection = () => {
   const [index, setIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('gallery');
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.offsetWidth || 1;
-      const targetX = -index * containerWidth;
-      // Faster, snappier animation
-      animate(x, targetX, {
-        type: 'spring',
-        stiffness: 500,
-        damping: 50,
-        mass: 0.8
-      });
+      setTranslateX(-index * containerWidth);
     }
-  }, [index, x, isMobile]);
+  }, [index]);
+
+  // Update on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        setTranslateX(-index * containerRef.current.offsetWidth);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [index]);
 
   const handlePrev = () => setIndex(i => Math.max(0, i - 1));
   const handleNext = () => setIndex(i => Math.min(galleryItems.length - 1, i + 1));
@@ -155,12 +145,10 @@ export const GallerySection = () => {
   return (
     <section id="gallery" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-8 sm:mb-12"
+        <div
+          className={`text-center mb-8 sm:mb-12 transition-all duration-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-foreground">
             Season 1 Gallery
@@ -168,24 +156,19 @@ export const GallerySection = () => {
           <p className="text-muted-foreground text-base sm:text-lg">
             Memories from our incredible community
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className="glass-card p-3 sm:p-4 rounded-2xl"
+        <div
+          className={`glass-card p-3 sm:p-4 rounded-2xl transition-all duration-500 delay-100 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
         >
           <div className="flex flex-col gap-3 sm:gap-4">
-            {/* Main Carousel */}
-            <div
-              className="relative overflow-hidden rounded-xl bg-black/20"
-              ref={containerRef}
-            >
-              <motion.div
-                className="flex"
-                style={{ x }}
+            {/* Main Carousel - CSS transitions instead of framer-motion */}
+            <div className="relative overflow-hidden rounded-xl bg-black/20" ref={containerRef}>
+              <div
+                className="flex transition-transform duration-300 ease-out"
+                style={{ transform: `translateX(${translateX}px)` }}
               >
                 {galleryItems.map(item => (
                   <div key={item.id} className="shrink-0 w-full aspect-video">
@@ -198,13 +181,13 @@ export const GallerySection = () => {
                     />
                   </div>
                 ))}
-              </motion.div>
+              </div>
 
               {/* Previous Button */}
               <button
                 disabled={index === 0}
                 onClick={handlePrev}
-                className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-10 ${
+                className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 z-10 ${
                   index === 0
                     ? 'opacity-40 cursor-not-allowed bg-black/50'
                     : 'bg-black/60 hover:bg-black/80 active:scale-95'
@@ -217,7 +200,7 @@ export const GallerySection = () => {
               <button
                 disabled={index === galleryItems.length - 1}
                 onClick={handleNext}
-                className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-10 ${
+                className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 z-10 ${
                   index === galleryItems.length - 1
                     ? 'opacity-40 cursor-not-allowed bg-black/50'
                     : 'bg-black/60 hover:bg-black/80 active:scale-95'
@@ -235,8 +218,8 @@ export const GallerySection = () => {
             {/* Thumbnails */}
             <Thumbnails index={index} setIndex={setIndex} />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-};
+}

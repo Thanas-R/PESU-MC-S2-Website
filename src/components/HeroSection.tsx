@@ -91,16 +91,16 @@ export const HeroSection = ({
           transition={{ delay: 0.3, duration: 0.4 }}
           className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-5 mb-8 sm:mb-10"
         >
-          {/* Version Card - fixed hover blink */}
-          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/25">
+          {/* Version Card - tinted glass style */}
+          <div className="bg-black/50 border border-white/20 px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/30 shadow-xl">
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2">Version</p>
             <p className="text-foreground text-xl sm:text-2xl font-semibold">1.21.11</p>
           </div>
 
-          {/* IP Address Card - fixed hover */}
+          {/* IP Address Card - tinted glass style */}
           <button
             onClick={handleCopyIP}
-            className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer transition-colors duration-200 hover:border-white/25"
+            className="bg-black/50 border border-white/20 px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer transition-colors duration-200 hover:border-white/30 shadow-xl"
           >
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2 flex items-center justify-center sm:justify-start gap-2">
               IP Address
@@ -113,8 +113,8 @@ export const HeroSection = ({
             <p className="text-foreground text-lg sm:text-2xl font-semibold font-mono">{serverIP}</p>
           </button>
 
-          {/* Mode Card - fixed hover blink */}
-          <div className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/25">
+          {/* Mode Card - tinted glass style */}
+          <div className="bg-black/50 border border-white/20 px-6 sm:px-10 py-4 sm:py-6 rounded-2xl transition-colors duration-200 hover:border-white/30 shadow-xl">
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2">Mode</p>
             <p className="text-foreground text-xl sm:text-2xl font-semibold">Survival</p>
           </div>

@@ -73,15 +73,27 @@
 
 @layer components {
   .glass {
-    @apply bg-black/30 backdrop-blur-xl border border-white/15 shadow-lg;
+    @apply bg-black/30 border border-white/15 shadow-lg;
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    will-change: backdrop-filter;
+    transform: translateZ(0);
   }
 
   .glass-card {
-    @apply bg-black/30 backdrop-blur-xl border border-white/15 rounded-2xl shadow-xl;
+    @apply bg-black/30 border border-white/15 rounded-2xl shadow-xl;
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    will-change: backdrop-filter;
+    transform: translateZ(0);
   }
 
   .glass-button {
-    @apply bg-black/30 backdrop-blur-md border border-white/20 hover:bg-black/40 transition-all duration-300;
+    @apply bg-black/30 border border-white/20 hover:bg-black/40 transition-all duration-300;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    will-change: backdrop-filter;
+    transform: translateZ(0);
   }
 }
 

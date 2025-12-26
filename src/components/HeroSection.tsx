@@ -78,7 +78,7 @@ export const HeroSection = ({
           transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
           className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 sm:mb-8 tracking-tight text-foreground"
         >
-          PESU Minecraft
+          PESU MINECRAFT
           <span className="flex items-center justify-center gap-2 sm:gap-3 text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 font-light text-muted-foreground">
             SEASON 2
             <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />

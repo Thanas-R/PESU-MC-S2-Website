@@ -75,9 +75,25 @@ export const HeroSection = ({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 sm:mb-8 tracking-tight text-foreground"
+          className="mb-6 sm:mb-8 tracking-tight text-foreground"
         >
-          PESU Minecraft
+          {/* Outlined / Hollow Title - only this span is hollow */}
+          <span
+            className="
+              block
+              font-extrabold
+              uppercase
+              tracking-tight
+              leading-none
+              text-6xl sm:text-8xl md:text-9xl lg:text-[8rem]
+              text-transparent
+              [-webkit-text-stroke:4px_#ffffff]
+            "
+          >
+            PESU MINECRAFT
+          </span>
+
+          {/* Season / small subtitle (keeps normal filled styling) */}
           <span className="flex items-center justify-center gap-2 sm:gap-3 text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 font-light text-muted-foreground">
             SEASON 2
             <img src={serverIcon} alt="Server Icon" className="inline-block h-[1em] w-[1em] object-contain" />

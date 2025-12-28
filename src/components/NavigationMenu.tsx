@@ -173,11 +173,7 @@ export const NavigationMenu = ({
                   </div>
 
                   {/* Contributors Thanks */}
-                  <div className="pt-4 sm:pt-6 border-t border-white/10">
-                    <p className="text-muted-foreground text-xs sm:text-sm text-center italic">
-                      Special thanks to all the Contributors in development of the server
-                    </p>
-                  </div>
+                  
                 </div>
               </motion.div>
             </div>

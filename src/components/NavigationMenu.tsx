@@ -100,7 +100,7 @@ export const NavigationMenu = ({
                   Server Contents
                 </motion.button>
 
-                <div className="flex flex-wrap gap-3 pt-4 sm:pt-6 py-[10px]">
+                <div className="flex flex-wrap gap-3 pt-4 sm:pt-6 py-[5px]">
                   <motion.a initial={{
                 opacity: 0,
                 y: 10

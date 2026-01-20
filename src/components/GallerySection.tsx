@@ -10,6 +10,12 @@ import nightStars from '@/assets/gallery/night-stars.png';
 import forestMist from '@/assets/gallery/forest-mist.png';
 import endDimension from '@/assets/gallery/end-dimension.png';
 import mountainLake from '@/assets/gallery/mountain-lake.png';
+import endPortalTeam from '@/assets/gallery/end-portal-team.png';
+import celebrationNight from '@/assets/gallery/celebration-night.png';
+import cherryTeamBeacon from '@/assets/gallery/cherry-team-beacon.png';
+import endDragonFight from '@/assets/gallery/end-dragon-fight.png';
+import cherryLanternPath from '@/assets/gallery/cherry-lantern-path.png';
+import rainyCottage from '@/assets/gallery/rainy-cottage.png';
 
 const galleryItems = [
   { id: 1, url: cherryVillage, title: 'Cherry Blossom Village' },
@@ -23,6 +29,12 @@ const galleryItems = [
   { id: 9, url: forestMist, title: 'Misty Forest Morning' },
   { id: 10, url: endDimension, title: 'The End Dimension' },
   { id: 11, url: mountainLake, title: 'Mountain Lake Vista' },
+  { id: 12, url: endPortalTeam, title: 'End Portal Team' },
+  { id: 13, url: celebrationNight, title: 'Night Celebration' },
+  { id: 14, url: cherryTeamBeacon, title: 'Cherry Beacon Gathering' },
+  { id: 15, url: endDragonFight, title: 'Dragon Fight Victory' },
+  { id: 16, url: cherryLanternPath, title: 'Lantern Lit Path' },
+  { id: 17, url: rainyCottage, title: 'Rainy Day Cottage' },
 ];
 
 const FULL_WIDTH_PX = 100;

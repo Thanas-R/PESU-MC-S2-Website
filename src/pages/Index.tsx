@@ -8,14 +8,18 @@ import { FeaturesSection } from '@/components/FeaturesSection';
 import { HowToJoinSection } from '@/components/HowToJoinSection';
 import { GallerySection } from '@/components/GallerySection';
 import { LoadingScreen } from '@/components/LoadingScreen';
+import { TrailerPopup } from '@/components/TrailerPopup';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import heroBg from '@/assets/hero-bg.png';
 import serverIcon from '@/assets/server-icon.png';
+
+const TRAILER_SHOWN_KEY = 'pesu_trailer_shown';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServerContentsOpen, setIsServerContentsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
   // Smooth scroll only on desktop
   useSmoothScroll();
@@ -29,6 +33,15 @@ const Index = () => {
       loadedCount++;
       if (loadedCount >= imagesToLoad.length) {
         setIsLoading(false);
+        
+        // Show trailer popup on first visit after loading completes
+        const hasSeenTrailer = sessionStorage.getItem(TRAILER_SHOWN_KEY);
+        if (!hasSeenTrailer) {
+          setTimeout(() => {
+            setIsTrailerOpen(true);
+            sessionStorage.setItem(TRAILER_SHOWN_KEY, 'true');
+          }, 500);
+        }
       }
     };
 
@@ -48,6 +61,17 @@ const Index = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Handle ESC key to close trailer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isTrailerOpen) {
+        setIsTrailerOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isTrailerOpen]);
+
   const handleNavigate = (section: string) => {
     const element = document.getElementById(section);
     if (element) {
@@ -63,6 +87,12 @@ const Index = () => {
       <AnimatePresence>
         {isLoading && <LoadingScreen isLoading={isLoading} />}
       </AnimatePresence>
+
+      {/* Trailer Popup */}
+      <TrailerPopup 
+        isOpen={isTrailerOpen} 
+        onClose={() => setIsTrailerOpen(false)} 
+      />
 
       {/* Fixed Background - no blur */}
       <div className="fixed inset-0 z-0" style={{
@@ -90,13 +120,13 @@ const Index = () => {
 
       {/* Main Content - normal scroll */}
       <main className="relative z-10">
-        <HeroSection onOpenServerContents={() => setIsServerContentsOpen(true)} />
+        <HeroSection 
+          onOpenServerContents={() => setIsServerContentsOpen(true)} 
+          onOpenTrailer={() => setIsTrailerOpen(true)}
+        />
         <FeaturesSection />
         <HowToJoinSection />
         <GallerySection />
-
-        {/* Footer */}
-        
       </main>
     </div>
   );

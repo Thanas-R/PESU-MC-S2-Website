@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface ServerStatus {
   isOnline: boolean;
@@ -10,13 +10,18 @@ interface ServerStatus {
 const SERVER_ADDRESS = 'pesu-mc.ddns.net';
 const API_URL = `https://api.mcsrvstat.us/3/${SERVER_ADDRESS}`;
 
+// Store the last known maxPlayers globally to persist between offline states
+let lastKnownMaxPlayers = 20;
+
 export const useServerStatus = (): ServerStatus => {
   const [status, setStatus] = useState<ServerStatus>({
     isOnline: false,
     playerCount: 0,
-    maxPlayers: 100,
+    maxPlayers: lastKnownMaxPlayers,
     isLoading: true,
   });
+  
+  const previousOnline = useRef<boolean | null>(null);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -33,18 +38,34 @@ export const useServerStatus = (): ServerStatus => {
         
         const data = await response.json();
         
-        setStatus({
-          isOnline: data.online ?? false,
-          playerCount: data.players?.online ?? 0,
-          maxPlayers: data.players?.max ?? 100,
+        const isOnline = data.online ?? false;
+        const playerCount = data.players?.online ?? 0;
+        
+        // Update lastKnownMaxPlayers only when server is online
+        if (isOnline && data.players?.max) {
+          lastKnownMaxPlayers = data.players.max;
+        }
+        
+        const newStatus = {
+          isOnline,
+          playerCount: isOnline ? playerCount : 0,
+          maxPlayers: lastKnownMaxPlayers,
           isLoading: false,
-        });
+        };
+        
+        // Check if status changed for animation trigger
+        if (previousOnline.current !== null && previousOnline.current !== isOnline) {
+          // Status changed - this will trigger re-render with new values
+        }
+        previousOnline.current = isOnline;
+        
+        setStatus(newStatus);
       } catch (error) {
         console.error('Error fetching server status:', error);
         setStatus({
           isOnline: false,
           playerCount: 0,
-          maxPlayers: 100,
+          maxPlayers: lastKnownMaxPlayers,
           isLoading: false,
         });
       }
@@ -52,8 +73,8 @@ export const useServerStatus = (): ServerStatus => {
 
     fetchStatus();
     
-    // Refresh every 2 minutes (API cache time)
-    const interval = setInterval(fetchStatus, 120000);
+    // Refresh every 30 seconds for more responsive updates
+    const interval = setInterval(fetchStatus, 30000);
     
     return () => clearInterval(interval);
   }, []);

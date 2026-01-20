@@ -63,11 +63,19 @@
 
   html {
     scroll-behavior: smooth;
+    /* Hide scrollbar globally */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
   }
 }
 

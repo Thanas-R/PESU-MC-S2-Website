@@ -158,7 +158,7 @@ export const HeroSection = ({
             {/* YouTube Button */}
             <button
               onClick={onOpenTrailer}
-              className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg shadow-red-500/30 hover:shadow-red-500/50 overflow-hidden bg-white"
+              className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg shadow-red-500/30 hover:shadow-red-500/50 overflow-hidden"
               aria-label="Watch Trailer"
             >
               <img src={youtubeIcon} alt="YouTube" className="w-[85%] h-[85%] object-contain" />

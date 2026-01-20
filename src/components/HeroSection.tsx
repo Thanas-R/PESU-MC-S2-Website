@@ -4,6 +4,7 @@ import { Copy, Check, Users } from 'lucide-react';
 import { useState } from 'react';
 import serverIcon from '@/assets/server-icon.png';
 import { toast } from '@/hooks/use-toast';
+import { useServerStatus } from '@/hooks/use-server-status';
 
 interface HeroSectionProps {
   onOpenServerContents: () => void;
@@ -15,10 +16,8 @@ export const HeroSection = ({
   const [copied, setCopied] = useState(false);
   const serverIP = 'pesu-mc.ddns.net';
 
-  // Placeholder values - will be replaced with API data later
-  const isOnline = false;
-  const playerCount = 0;
-  const maxPlayers = 100;
+  // Real-time server status from API
+  const { isOnline, playerCount, maxPlayers, isLoading } = useServerStatus();
 
   const handleCopyIP = async () => {
     try {
@@ -130,7 +129,7 @@ export const HeroSection = ({
         >
           {/* Discord Button */}
           <a
-            href="https://discord.com/invite/dVGj9pfG"
+            href="https://discord.gg/BJuyDHBm52"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-[hsl(235,86%,65%)] hover:bg-[hsl(235,86%,58%)] rounded-2xl font-bold text-white transition-all duration-200 hover:scale-105 text-base sm:text-lg"

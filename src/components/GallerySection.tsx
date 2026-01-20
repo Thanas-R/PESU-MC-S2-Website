@@ -7,9 +7,6 @@ import desertPlayer from '@/assets/gallery/desert-player.png';
 import lushCave from '@/assets/gallery/lush-cave.png';
 import cherryRain from '@/assets/gallery/cherry-rain.png';
 import nightStars from '@/assets/gallery/night-stars.png';
-import forestMist from '@/assets/gallery/forest-mist.png';
-import endDimension from '@/assets/gallery/end-dimension.png';
-import mountainLake from '@/assets/gallery/mountain-lake.png';
 import endPortalTeam from '@/assets/gallery/end-portal-team.png';
 import celebrationNight from '@/assets/gallery/celebration-night.png';
 import cherryTeamBeacon from '@/assets/gallery/cherry-team-beacon.png';
@@ -25,7 +22,6 @@ import snowyPlains from '@/assets/gallery/snowy-plains.png';
 import strongholdPortal from '@/assets/gallery/stronghold-portal.png';
 import duelsArena from '@/assets/gallery/duels-arena.png';
 import dockFishing from '@/assets/gallery/dock-fishing.png';
-import skyFireworks from '@/assets/gallery/sky-fireworks.png';
 
 const galleryItems = [
   { id: 1, url: cherryVillage, title: 'Cherry Blossom Village' },
@@ -36,25 +32,21 @@ const galleryItems = [
   { id: 6, url: lushCave, title: 'Lush Cave Discovery' },
   { id: 7, url: cherryRain, title: 'Cherry Rain Romance' },
   { id: 8, url: nightStars, title: 'Starry Night' },
-  { id: 9, url: forestMist, title: 'Misty Forest Morning' },
-  { id: 10, url: endDimension, title: 'The End Dimension' },
-  { id: 11, url: mountainLake, title: 'Mountain Lake Vista' },
-  { id: 12, url: endPortalTeam, title: 'End Portal Team' },
-  { id: 13, url: celebrationNight, title: 'Night Celebration' },
-  { id: 14, url: cherryTeamBeacon, title: 'Cherry Beacon Gathering' },
-  { id: 15, url: endDragonFight, title: 'Dragon Fight Victory' },
-  { id: 16, url: cherryLanternPath, title: 'Lantern Lit Path' },
-  { id: 17, url: rainyCottage, title: 'Rainy Day Cottage' },
+  { id: 9, url: endPortalTeam, title: 'End Portal Team' },
+  { id: 10, url: celebrationNight, title: 'Night Celebration' },
+  { id: 11, url: cherryTeamBeacon, title: 'Cherry Beacon Gathering' },
+  { id: 12, url: endDragonFight, title: 'Dragon Fight Victory' },
+  { id: 13, url: cherryLanternPath, title: 'Lantern Lit Path' },
+  { id: 14, url: rainyCottage, title: 'Rainy Day Cottage' },
   // New gallery images
-  { id: 18, url: fireworksNight, title: 'Fireworks Night' },
-  { id: 19, url: floatingIsland, title: 'Floating Island' },
-  { id: 20, url: snowyMountains, title: 'Snowy Mountain Range' },
-  { id: 21, url: netherBase, title: 'Nether Base' },
-  { id: 22, url: snowyPlains, title: 'Snowy Plains Sunset' },
-  { id: 23, url: strongholdPortal, title: 'Stronghold Portal Room' },
-  { id: 24, url: duelsArena, title: 'Duels Arena' },
-  { id: 25, url: dockFishing, title: 'Dock Fishing' },
-  { id: 26, url: skyFireworks, title: 'Sky Fireworks' },
+  { id: 15, url: fireworksNight, title: 'Fireworks Night' },
+  { id: 16, url: floatingIsland, title: 'Floating Island' },
+  { id: 17, url: snowyMountains, title: 'Snowy Mountain Range' },
+  { id: 18, url: netherBase, title: 'Nether Base' },
+  { id: 19, url: snowyPlains, title: 'Snowy Plains Sunset' },
+  { id: 20, url: strongholdPortal, title: 'Stronghold Portal Room' },
+  { id: 21, url: duelsArena, title: 'Duels Arena' },
+  { id: 22, url: dockFishing, title: 'Dock Fishing' },
 ];
 
 const FULL_WIDTH_PX = 100;
@@ -183,7 +175,7 @@ export const GallerySection = () => {
           }`}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-foreground">
-            Season 1 Gallery
+            Season 1 & 2 Gallery
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg">
             Memories from our incredible community

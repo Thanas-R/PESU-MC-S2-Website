@@ -26,7 +26,7 @@ const navItems = [{
 const adminPanel = {
   owner: 'PSG',
   ceo: 'Daring Dash',
-  admins: ['Reference_Frame', 'Josh', 'Edward the Enderman', 'Woduh'],
+  admins: ['pmmdot(ref)', 'Josh', 'Edward Enderman', 'Woduh'],
   webDev: 'DarkSpacePirate',
   wither: 'Gravityboots'
 };
@@ -170,43 +170,45 @@ export const NavigationMenu = ({
           }} className="glass p-6 sm:p-8 rounded-2xl self-start mt-auto lg:mt-0">
                 <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8">Admin Panel</p>
 
-                <div className="space-y-5 sm:space-y-6">
+                <div className="space-y-6">
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Owner</p>
-                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-sm sm:text-base font-bold">
+                    <p className="text-lg sm:text-xl font-bold text-foreground">
                       {adminPanel.owner}
-                    </span>
+                    </p>
                   </div>
 
                   <div>
-                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2 sm:mb-3">Admins</p>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-3">Admins</p>
                     <div className="flex flex-wrap gap-2">
-                      {adminPanel.admins.map(admin => <span key={admin} className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                      {adminPanel.admins.map(admin => (
+                        <span key={admin} className="px-3 py-1.5 bg-white/10 border border-white/10 rounded-lg text-sm font-medium">
                           {admin}
-                        </span>)}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">CEO</p>
-                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                    <p className="text-lg sm:text-xl font-bold text-foreground">
                       {adminPanel.ceo}
-                    </span>
+                    </p>
                   </div>
 
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Wandering Trader</p>
-                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                    <p className="text-lg sm:text-xl font-bold text-foreground">
                       {adminPanel.webDev}
-                    </span>
-                    <p className="text-muted-foreground text-xs mt-1.5">[Scripting, Website & Marketing]</p>
+                    </p>
+                    <p className="text-muted-foreground text-xs mt-1">[Scripting, Website & Marketing]</p>
                   </div>
 
                   <div>
                     <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Wither</p>
-                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                    <p className="text-lg sm:text-xl font-bold text-foreground">
                       {adminPanel.wither}
-                    </span>
+                    </p>
                   </div>
                 </div>
               </motion.div>

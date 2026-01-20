@@ -1,11 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Users } from 'lucide-react';
+import { useServerStatus } from '@/hooks/use-server-status';
+
 interface NavigationMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (section: string) => void;
   onOpenServerContents: () => void;
 }
+
 const navItems = [{
   label: 'Home',
   section: 'hero'
@@ -19,11 +22,13 @@ const navItems = [{
   label: 'Gallery',
   section: 'gallery'
 }];
+
 const adminPanel = {
   owner: 'PSG',
   ceo: 'Daring Dash',
   admins: ['Reference_Frame', 'Josh', 'Edward the Enderman', 'Woduh'],
-  webDev: 'DarkSpacePirate'
+  webDev: 'DarkSpacePirate',
+  wither: 'Gravityboots'
 };
 export const NavigationMenu = ({
   isOpen,
@@ -31,6 +36,8 @@ export const NavigationMenu = ({
   onNavigate,
   onOpenServerContents
 }: NavigationMenuProps) => {
+  const { isOnline, playerCount, maxPlayers } = useServerStatus();
+  
   return <AnimatePresence>
       {isOpen && <>
           {/* Backdrop - reduced blur on mobile for performance */}
@@ -109,14 +116,14 @@ export const NavigationMenu = ({
                 y: 0
               }} transition={{
                 delay: 0.25
-              }} href="https://discord.com/invite/dVGj9pfG" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[hsl(235,86%,65%)] hover:bg-[hsl(235,86%,58%)] rounded-xl font-semibold text-white transition-all duration-300 text-sm sm:text-base">
+              }} href="https://discord.gg/BJuyDHBm52" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[hsl(235,86%,65%)] hover:bg-[hsl(235,86%,58%)] rounded-xl font-semibold text-white transition-all duration-300 text-sm sm:text-base">
                     <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" />
                     </svg>
                     Join Discord
                   </motion.a>
 
-                  {/* Server Status Widget - same as hero */}
+                  {/* Server Status Widget - real-time */}
                   <motion.div initial={{
                 opacity: 0,
                 y: 10
@@ -125,11 +132,31 @@ export const NavigationMenu = ({
                 y: 0
               }} transition={{
                 delay: 0.3
-              }} className="inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-red-500/20 border border-red-500/40 rounded-xl">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                    <span className="font-semibold text-red-400 text-sm sm:text-base">Server Offline</span>
-                    
-                    
+              }} className={`inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border ${
+                isOnline 
+                  ? 'bg-green-500/20 border-green-500/40' 
+                  : 'bg-red-500/20 border-red-500/40'
+              }`}>
+                    <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+                    <span className={`font-semibold text-sm sm:text-base ${isOnline ? 'text-green-400' : 'text-red-400'}`}>
+                      Server {isOnline ? 'Online' : 'Offline'}
+                    </span>
+                  </motion.div>
+
+                  {/* Player Count */}
+                  <motion.div initial={{
+                opacity: 0,
+                y: 10
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                delay: 0.35
+              }} className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-card rounded-xl">
+                    <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
+                    <span className="text-foreground font-semibold text-sm sm:text-base">
+                      {playerCount}/{maxPlayers} Players
+                    </span>
                   </motion.div>
                 </div>
               </div>
@@ -144,7 +171,7 @@ export const NavigationMenu = ({
           }} transition={{
             delay: 0.15
           }} className="glass p-6 sm:p-8 rounded-2xl self-start mt-auto lg:mt-0">
-                
+                <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8">Admin Panel</p>
 
                 <div className="space-y-4 sm:space-y-6">
                   <div>
@@ -172,11 +199,11 @@ export const NavigationMenu = ({
                     <p className="text-muted-foreground text-xs mt-1">[Scripting, Website & Marketing]</p>
                   </div>
 
-                  {/* Contributors Thanks */}
-                  <div className="pt-4 sm:pt-6 border-t border-white/10">
-                    <p className="text-muted-foreground text-xs sm:text-sm text-center italic">
-                      Special thanks to all the Contributors in development of the server
-                    </p>
+                  <div>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Wither</p>
+                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                      {adminPanel.wither}
+                    </span>
                   </div>
                 </div>
               </motion.div>

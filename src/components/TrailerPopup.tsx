@@ -2,13 +2,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-
 interface TrailerPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-export const TrailerPopup = ({ isOpen, onClose }: TrailerPopupProps) => {
+export const TrailerPopup = ({
+  isOpen,
+  onClose
+}: TrailerPopupProps) => {
   // ESC key handler
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -20,41 +21,40 @@ export const TrailerPopup = ({ isOpen, onClose }: TrailerPopupProps) => {
   // Portaling to <body> avoids "fixed inside transformed parent" issues (e.g. smooth-scroll wrappers)
   // which can cause the modal to appear offset instead of centered.
   if (typeof document === 'undefined') return null;
-
-  return createPortal(
-    <AnimatePresence>
-      {isOpen && (
-        <>
+  return createPortal(<AnimatePresence>
+      {isOpen && <>
           {/* Backdrop with blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md"
-            onClick={onClose}
-          />
+          <motion.div initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} exit={{
+        opacity: 0
+      }} transition={{
+        duration: 0.3
+      }} className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md" onClick={onClose} />
 
           {/* Centering layer */}
-          <div
-            className="fixed inset-0 z-[101] flex items-center justify-center p-4 sm:p-6"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Season 2 Trailer"
-          >
+          <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Season 2 Trailer">
             {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="w-full max-w-4xl bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden"
-            >
+            <motion.div initial={{
+          opacity: 0,
+          scale: 0.9,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          scale: 1,
+          y: 0
+        }} exit={{
+          opacity: 0,
+          scale: 0.9,
+          y: 20
+        }} transition={{
+          duration: 0.3,
+          ease: 'easeOut'
+        }} className="w-full max-w-4xl bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden">
               {/* Close button */}
-              <button
-                onClick={onClose}
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 p-2 rounded-full glass-button hover:scale-105 transition-transform"
-              >
+              <button onClick={onClose} className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 p-2 rounded-full glass-button hover:scale-105 transition-transform">
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
 
@@ -66,31 +66,16 @@ export const TrailerPopup = ({ isOpen, onClose }: TrailerPopupProps) => {
 
               {/* Video */}
               <div className="aspect-video w-full bg-black">
-                <iframe
-                  src="https://www.youtube.com/embed/aZFPNr3brIk?autoplay=1&rel=0&modestbranding=1&hd=1&vq=hd1080"
-                  className="w-full h-full"
-                  allow="autoplay; encrypted-media; fullscreen"
-                  allowFullScreen
-                  title="PESU Minecraft Season 2 Trailer"
-                />
+                <iframe src="https://www.youtube.com/embed/aZFPNr3brIk?autoplay=1&rel=0&modestbranding=1&hd=1&vq=hd1080" className="w-full h-full" allow="autoplay; encrypted-media; fullscreen" allowFullScreen title="PESU Minecraft Season 2 Trailer" />
               </div>
 
               {/* Footer */}
               <div className="p-3 sm:p-4 border-t border-white/10 flex justify-between items-center">
                 <p className="text-muted-foreground text-xs sm:text-sm">Press ESC or click outside to close</p>
-                <button
-                  onClick={onClose}
-                  className="px-4 py-2 glass-button rounded-lg text-sm font-medium hover:bg-white/20 transition-colors"
-                >
-                  Close
-                </button>
+                
               </div>
             </motion.div>
           </div>
-        </>
-      )}
-    </AnimatePresence>,
-    document.body
-  );
+        </>}
+    </AnimatePresence>, document.body);
 };
-

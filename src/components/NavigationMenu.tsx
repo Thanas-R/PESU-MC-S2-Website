@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useServerStatus } from '@/hooks/use-server-status';
+import { useEffect } from 'react';
 
 interface NavigationMenuProps {
   isOpen: boolean;
@@ -38,6 +39,15 @@ export const NavigationMenu = ({
   onOpenServerContents
 }: NavigationMenuProps) => {
   const { isOnline, playerCount, maxPlayers } = useServerStatus();
+  
+  // ESC key handler
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
   
   return <AnimatePresence>
       {isOpen && <>

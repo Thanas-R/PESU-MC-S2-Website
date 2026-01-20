@@ -1,14 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Package, Terminal, BookOpen, ExternalLink, Server, Cpu, Network, Gauge } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
 interface ServerContentsModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 const LAST_TAB_KEY = 'server_contents_last_tab';
-
 const tabs = [{
   id: 'specs',
   label: 'Specifications',
@@ -26,7 +23,6 @@ const tabs = [{
   label: 'Commands',
   icon: Terminal
 }];
-
 const duelsCommands = [{
   cmd: '/duel <player>',
   desc: 'Challenge a player to a duel'
@@ -46,7 +42,6 @@ const duelsCommands = [{
   cmd: '/duel leaderboard',
   desc: 'View the duel leaderboard'
 }];
-
 const partyCommands = [{
   cmd: '/party create',
   desc: 'Creates a new party'
@@ -63,7 +58,6 @@ const partyCommands = [{
   cmd: '/party duel <leader>',
   desc: 'Challenges another party leader to a party vs. party match'
 }];
-
 const teamCommands = [{
   cmd: '/tc, /teamchat, /tchat',
   desc: 'Sends a message to only the members of your current team'
@@ -113,7 +107,6 @@ const teamCommands = [{
   cmd: '/team permission [add/remove] <permission>',
   desc: 'Adds or removes a permission for team managers to use specific team commands'
 }];
-
 export const ServerContentsModal = ({
   isOpen,
   onClose
@@ -137,27 +130,30 @@ export const ServerContentsModal = ({
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
+  return <AnimatePresence>
+      {isOpen && <>
+          <motion.div initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} exit={{
+        opacity: 0
+      }} transition={{
+        duration: 0.2
+      }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:backdrop-blur-md" onClick={onClose} />
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:backdrop-blur-md"
-            onClick={onClose}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 30 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-4xl md:h-fit md:max-h-[85vh] z-50 bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-          >
+          <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} exit={{
+        opacity: 0,
+        y: 30
+      }} transition={{
+        duration: 0.15
+      }} className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-4xl md:h-fit md:max-h-[85vh] z-50 bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 shrink-0">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Server Contents</h2>
@@ -168,27 +164,16 @@ export const ServerContentsModal = ({
 
             {/* Tabs */}
             <div className="flex gap-2 sm:gap-3 p-3 sm:p-4 border-b border-white/10 overflow-x-auto scrollbar-hide shrink-0">
-              {tabs.map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-medium transition-all duration-200 whitespace-nowrap text-sm sm:text-base shrink-0 ${
-                    activeTab === tab.id 
-                      ? 'bg-foreground text-background' 
-                      : 'bg-white/10 border border-white/20 hover:bg-white/15'
-                  }`}
-                >
+              {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-medium transition-all duration-200 whitespace-nowrap text-sm sm:text-base shrink-0 ${activeTab === tab.id ? 'bg-foreground text-background' : 'bg-white/10 border border-white/20 hover:bg-white/15'}`}>
                   <tab.icon className="w-4 h-4 shrink-0" />
                   <span>{tab.label}</span>
-                </button>
-              ))}
+                </button>)}
             </div>
 
             {/* Content */}
             <div className="flex-1 overflow-auto p-4 sm:p-6 scrollbar-hide">
               {/* Specifications Tab */}
-              {activeTab === 'specs' && (
-                <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
+              {activeTab === 'specs' && <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
                   {/* Infrastructure Header */}
                   <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
                     <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
@@ -200,8 +185,7 @@ export const ServerContentsModal = ({
                       <p>• Hosted on <strong className="text-foreground">Google Cloud Platform</strong> :: the same infrastructure used by large-scale production systems, not student projects.</p>
                     </div>
                     <div className="mt-4 p-3 sm:p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
-                      <p className="text-sm text-yellow-200/90">
-                        While most university servers run on repurposed desktops or bargain VPS nodes or even worse <strong className="text-yellow-400">ATERNOS</strong> (which lags with just 5 ppl), this server operates on cloud-native, production-class architecture designed for high-throughput, low-latency workloads.
+                      <p className="text-sm text-yellow-200/90">While most university servers run on repurposed desktops or bargain VPS nodes (which lags with just 5 ppl), this server operates on cloud-native, production-class architecture designed for high-throughput, low-latency workloads.<strong className="text-yellow-400"></strong> (which lags with just 5 ppl), this server operates on cloud-native, production-class architecture designed for high-throughput, low-latency workloads.
                       </p>
                     </div>
                   </div>
@@ -258,36 +242,25 @@ export const ServerContentsModal = ({
                       <p>• <strong className="text-foreground">Craft Controller</strong> : Insane Dashboard for moderation</p>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
 
-              {activeTab === 'datapacks' && (
-                <div className="text-center py-12 sm:py-16">
+              {activeTab === 'datapacks' && <div className="text-center py-12 sm:py-16">
                   <Package className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg sm:text-xl font-semibold mb-2">Coming Soon</h3>
                   <p className="text-muted-foreground text-sm sm:text-base">Datapack documentation is being prepared.</p>
-                </div>
-              )}
+                </div>}
 
-              {activeTab === 'commands' && (
-                <div className="text-center py-12 sm:py-16">
+              {activeTab === 'commands' && <div className="text-center py-12 sm:py-16">
                   <Terminal className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg sm:text-xl font-semibold mb-2">Coming Soon</h3>
                   <p className="text-muted-foreground text-sm sm:text-base">Full command list is being prepared.</p>
-                </div>
-              )}
+                </div>}
 
-              {activeTab === 'plugins' && (
-                <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
+              {activeTab === 'plugins' && <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
                   {/* Duels Plugin */}
                   <div className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
                     <div className="mb-4 sm:mb-6">
-                      <a
-                        href="https://modrinth.com/plugin/duels-optimised"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-foreground hover:text-muted-foreground transition-colors"
-                      >
+                      <a href="https://modrinth.com/plugin/duels-optimised" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-foreground hover:text-muted-foreground transition-colors">
                         Duels Plugin
                         <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
                       </a>
@@ -303,12 +276,10 @@ export const ServerContentsModal = ({
                         Challenge someone with <code className="text-foreground bg-white/10 px-1.5 py-0.5 rounded text-xs">/duel &lt;player&gt;</code> or use <code className="text-foreground bg-white/10 px-1.5 py-0.5 rounded text-xs">/duel queue</code> to find a random opponent.
                       </p>
                       <div className="grid gap-2">
-                        {duelsCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
+                        {duelsCommands.map(cmd => <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                             <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                             <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </div>
 
@@ -319,12 +290,10 @@ export const ServerContentsModal = ({
                         Create parties for group activities and team-based duels. Perfect for coordinating with multiple players.
                       </p>
                       <div className="grid gap-2">
-                        {partyCommands.map(cmd => (
-                          <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
+                        {partyCommands.map(cmd => <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                             <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                             <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </div>
                   </div>
@@ -339,12 +308,10 @@ export const ServerContentsModal = ({
                     </div>
 
                     <div className="grid gap-2">
-                      {teamCommands.map(cmd => (
-                        <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
+                      {teamCommands.map(cmd => <div key={cmd.cmd} className="flex flex-col gap-1 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
                           <code className="text-foreground font-mono text-xs sm:text-sm">{cmd.cmd}</code>
                           <span className="text-muted-foreground text-xs sm:text-sm">{cmd.desc}</span>
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </div>
 
@@ -357,12 +324,9 @@ export const ServerContentsModal = ({
                       or contact a staff member in-game!
                     </p>
                   </div>
-                </div>
-              )}
+                </div>}
             </div>
           </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
+        </>}
+    </AnimatePresence>;
 };

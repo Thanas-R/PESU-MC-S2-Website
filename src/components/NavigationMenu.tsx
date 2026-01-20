@@ -22,7 +22,7 @@ const navItems = [{
 const adminPanel = {
   owner: 'PSG',
   ceo: 'Daring Dash',
-  admins: ['pmmdot(ref)', 'Josh', 'Edward Enderman', 'Woduh'],
+  admins: ['Reference_Frame', 'Josh', 'Edward the Enderman', 'Woduh'],
   webDev: 'DarkSpacePirate'
 };
 export const NavigationMenu = ({

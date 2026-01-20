@@ -16,6 +16,16 @@ import cherryTeamBeacon from '@/assets/gallery/cherry-team-beacon.png';
 import endDragonFight from '@/assets/gallery/end-dragon-fight.png';
 import cherryLanternPath from '@/assets/gallery/cherry-lantern-path.png';
 import rainyCottage from '@/assets/gallery/rainy-cottage.png';
+// New images
+import fireworksNight from '@/assets/gallery/fireworks-night.png';
+import floatingIsland from '@/assets/gallery/floating-island.png';
+import snowyMountains from '@/assets/gallery/snowy-mountains.png';
+import netherBase from '@/assets/gallery/nether-base.png';
+import snowyPlains from '@/assets/gallery/snowy-plains.png';
+import strongholdPortal from '@/assets/gallery/stronghold-portal.png';
+import duelsArena from '@/assets/gallery/duels-arena.png';
+import dockFishing from '@/assets/gallery/dock-fishing.png';
+import skyFireworks from '@/assets/gallery/sky-fireworks.png';
 
 const galleryItems = [
   { id: 1, url: cherryVillage, title: 'Cherry Blossom Village' },
@@ -35,6 +45,16 @@ const galleryItems = [
   { id: 15, url: endDragonFight, title: 'Dragon Fight Victory' },
   { id: 16, url: cherryLanternPath, title: 'Lantern Lit Path' },
   { id: 17, url: rainyCottage, title: 'Rainy Day Cottage' },
+  // New gallery images
+  { id: 18, url: fireworksNight, title: 'Fireworks Night' },
+  { id: 19, url: floatingIsland, title: 'Floating Island' },
+  { id: 20, url: snowyMountains, title: 'Snowy Mountain Range' },
+  { id: 21, url: netherBase, title: 'Nether Base' },
+  { id: 22, url: snowyPlains, title: 'Snowy Plains Sunset' },
+  { id: 23, url: strongholdPortal, title: 'Stronghold Portal Room' },
+  { id: 24, url: duelsArena, title: 'Duels Arena' },
+  { id: 25, url: dockFishing, title: 'Dock Fishing' },
+  { id: 26, url: skyFireworks, title: 'Sky Fireworks' },
 ];
 
 const FULL_WIDTH_PX = 100;
@@ -176,7 +196,7 @@ export const GallerySection = () => {
           }`}
         >
           <div className="flex flex-col gap-3 sm:gap-4">
-            {/* Main Carousel - CSS transitions instead of framer-motion */}
+            {/* Main Carousel */}
             <div className="relative overflow-hidden rounded-xl bg-black/20" ref={containerRef}>
               <div
                 className="flex transition-transform duration-300 ease-out"

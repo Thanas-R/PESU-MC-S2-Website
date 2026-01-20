@@ -30,6 +30,7 @@ const adminPanel = {
   webDev: 'DarkSpacePirate',
   wither: 'Gravityboots'
 };
+
 export const NavigationMenu = ({
   isOpen,
   onClose,
@@ -64,7 +65,7 @@ export const NavigationMenu = ({
       }} transition={{
         duration: 0.2,
         ease: 'easeOut'
-      }} className="fixed inset-0 sm:inset-6 md:inset-12 lg:inset-20 z-50 bg-background/95 sm:bg-black/30 backdrop-blur-md sm:backdrop-blur-xl sm:border sm:border-white/15 sm:rounded-2xl overflow-auto">
+      }} className="fixed inset-0 sm:inset-6 md:inset-12 lg:inset-20 z-50 bg-background/95 sm:bg-black/30 backdrop-blur-md sm:backdrop-blur-xl sm:border sm:border-white/15 sm:rounded-2xl overflow-auto scrollbar-hide">
             {/* Close button - visible on mobile */}
             <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full glass-button z-10 sm:hidden">
               <X className="w-6 h-6" />
@@ -123,36 +124,32 @@ export const NavigationMenu = ({
                     Join Discord
                   </motion.a>
 
-                  {/* Server Status Widget - real-time */}
-                  <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                delay: 0.3
-              }} className={`inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border ${
-                isOnline 
-                  ? 'bg-green-500/20 border-green-500/40' 
-                  : 'bg-red-500/20 border-red-500/40'
-              }`}>
-                    <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
-                    <span className={`font-semibold text-sm sm:text-base ${isOnline ? 'text-green-400' : 'text-red-400'}`}>
+                  {/* Server Status Widget - real-time with animation */}
+                  <motion.div 
+                    key={isOnline ? 'online' : 'offline'}
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: 0.3, duration: 0.3 }}
+                    className={`inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border transition-all duration-500 ${
+                      isOnline 
+                        ? 'bg-green-500/20 border-green-500/40' 
+                        : 'bg-red-500/20 border-red-500/40'
+                    }`}
+                  >
+                    <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+                    <span className={`font-semibold text-sm sm:text-base transition-colors duration-500 ${isOnline ? 'text-green-400' : 'text-red-400'}`}>
                       Server {isOnline ? 'Online' : 'Offline'}
                     </span>
                   </motion.div>
 
-                  {/* Player Count */}
-                  <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                delay: 0.35
-              }} className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-card rounded-xl">
+                  {/* Player Count with animation */}
+                  <motion.div 
+                    key={`${playerCount}-${maxPlayers}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-card rounded-xl"
+                  >
                     <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
                     <span className="text-foreground font-semibold text-sm sm:text-base">
                       {playerCount}/{maxPlayers} Players
@@ -173,10 +170,12 @@ export const NavigationMenu = ({
           }} className="glass p-6 sm:p-8 rounded-2xl self-start mt-auto lg:mt-0">
                 <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8">Admin Panel</p>
 
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-5 sm:space-y-6">
                   <div>
-                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Owner</p>
-                    <p className="text-foreground text-lg sm:text-xl font-bold">{adminPanel.owner}</p>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Owner</p>
+                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-sm sm:text-base font-bold">
+                      {adminPanel.owner}
+                    </span>
                   </div>
 
                   <div>
@@ -189,18 +188,22 @@ export const NavigationMenu = ({
                   </div>
 
                   <div>
-                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">CEO</p>
-                    <p className="text-foreground text-base sm:text-lg font-semibold">{adminPanel.ceo}</p>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">CEO</p>
+                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                      {adminPanel.ceo}
+                    </span>
                   </div>
 
                   <div>
-                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Wandering Trader</p>
-                    <p className="text-foreground text-base sm:text-lg font-semibold">{adminPanel.webDev}</p>
-                    <p className="text-muted-foreground text-xs mt-1">[Scripting, Website & Marketing]</p>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Wandering Trader</p>
+                    <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
+                      {adminPanel.webDev}
+                    </span>
+                    <p className="text-muted-foreground text-xs mt-1.5">[Scripting, Website & Marketing]</p>
                   </div>
 
                   <div>
-                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Wither</p>
+                    <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Wither</p>
                     <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-medium">
                       {adminPanel.wither}
                     </span>

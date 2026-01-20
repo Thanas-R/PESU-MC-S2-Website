@@ -129,6 +129,15 @@ export const ServerContentsModal = ({
     localStorage.setItem(LAST_TAB_KEY, activeTab);
   }, [activeTab]);
 
+  // ESC key handler
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (

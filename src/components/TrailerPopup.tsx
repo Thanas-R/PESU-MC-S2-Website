@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
 
 interface TrailerPopupProps {
   isOpen: boolean;
@@ -8,6 +9,14 @@ interface TrailerPopupProps {
 }
 
 export const TrailerPopup = ({ isOpen, onClose }: TrailerPopupProps) => {
+  // ESC key handler
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
   // Portaling to <body> avoids "fixed inside transformed parent" issues (e.g. smooth-scroll wrappers)
   // which can cause the modal to appear offset instead of centered.
   if (typeof document === 'undefined') return null;

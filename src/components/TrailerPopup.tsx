@@ -22,13 +22,13 @@ export const TrailerPopup = ({ isOpen, onClose }: TrailerPopupProps) => {
             onClick={onClose}
           />
 
-          {/* Modal */}
+          {/* Modal - Properly Centered */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-4 sm:inset-6 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90%] md:max-w-4xl z-[101] bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-[90%] max-w-4xl z-[101] bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden"
           >
             {/* Close button */}
             <button

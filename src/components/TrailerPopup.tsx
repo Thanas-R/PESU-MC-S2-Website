@@ -71,7 +71,7 @@ export const TrailerPopup = ({
 
               {/* Footer */}
               <div className="p-3 sm:p-4 border-t border-white/10 flex justify-between items-center">
-                <p className="text-muted-foreground text-xs sm:text-sm">Press ESC or click outside to close</p>
+                <p className="text-muted-foreground text-xs sm:text-sm">Press ESC to close</p>
                 
               </div>
             </motion.div>

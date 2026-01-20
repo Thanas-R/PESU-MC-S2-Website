@@ -13,3 +13,9 @@ pesumc-s2.vercel.app
 pesu-mc-s2.vercel.app
 
 pesumcs2.vercel.app
+
+pesuminecraft.vercel.app
+
+pesu-minecraft.vercel.app
+
+pesu-minecraft-s2.vercel.app

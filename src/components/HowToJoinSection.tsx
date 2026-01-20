@@ -136,7 +136,7 @@ export const HowToJoinSection = () => {
           style={{ transitionDelay: isVisible ? '500ms' : '0ms' }}
         >
           <a
-            href="https://discord.com/invite/dVGj9pfG"
+            href="https://discord.com/invite/BJuyDHBm52"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-[hsl(235,86%,65%)] hover:bg-[hsl(235,86%,58%)] rounded-2xl font-semibold text-base sm:text-lg text-white transition-all duration-200 hover:scale-105 active:scale-95"

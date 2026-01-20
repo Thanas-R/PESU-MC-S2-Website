@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Users } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useServerStatus } from '@/hooks/use-server-status';
 
 interface NavigationMenuProps {
@@ -142,19 +142,6 @@ export const NavigationMenu = ({
                     </span>
                   </motion.div>
 
-                  {/* Player Count with animation */}
-                  <motion.div 
-                    key={`${playerCount}-${maxPlayers}`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35 }}
-                    className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-card rounded-xl"
-                  >
-                    <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
-                    <span className="text-foreground font-semibold text-sm sm:text-base">
-                      {playerCount}/{maxPlayers} Players
-                    </span>
-                  </motion.div>
                 </div>
               </div>
 
@@ -167,7 +154,7 @@ export const NavigationMenu = ({
             y: 0
           }} transition={{
             delay: 0.15
-          }} className="glass p-6 sm:p-8 rounded-2xl self-start mt-auto lg:mt-0">
+          }} className="glass p-6 sm:p-8 rounded-2xl self-start">
                 <p className="text-muted-foreground text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8">Admin Panel</p>
 
                 <div className="space-y-6">

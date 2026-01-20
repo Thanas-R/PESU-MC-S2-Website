@@ -60,7 +60,7 @@ export const TrailerPopup = ({
 
               {/* Header */}
               <div className="p-4 sm:p-5 border-b border-white/10">
-                <h2 className="text-xl sm:text-2xl font-bold pr-12">Season 2 Trailer</h2>
+                <h2 className="text-xl sm:text-2xl font-bold pr-12">Season 2 Teaser</h2>
                 <p className="text-muted-foreground text-sm mt-1">Welcome to PESU Minecraft</p>
               </div>
 

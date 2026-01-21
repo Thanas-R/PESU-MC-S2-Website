@@ -9,6 +9,7 @@ import { HowToJoinSection } from '@/components/HowToJoinSection';
 import { GallerySection } from '@/components/GallerySection';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { TrailerPopup } from '@/components/TrailerPopup';
+import { CountdownBanner } from '@/components/CountdownBanner';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import heroBg from '@/assets/hero-bg.png';
 import serverIcon from '@/assets/server-icon.png';
@@ -87,6 +88,9 @@ const Index = () => {
       <AnimatePresence>
         {isLoading && <LoadingScreen isLoading={isLoading} />}
       </AnimatePresence>
+
+      {/* Countdown Banner */}
+      <CountdownBanner />
 
       {/* Trailer Popup */}
       <TrailerPopup 

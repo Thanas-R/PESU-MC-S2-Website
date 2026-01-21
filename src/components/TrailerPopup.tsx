@@ -18,6 +18,18 @@ export const TrailerPopup = ({
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
+
+  // Lock body scroll when popup is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
   // Portaling to <body> avoids "fixed inside transformed parent" issues (e.g. smooth-scroll wrappers)
   // which can cause the modal to appear offset instead of centered.
   if (typeof document === 'undefined') return null;

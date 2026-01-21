@@ -19,7 +19,7 @@ const steps = [
   {
     number: '04',
     title: 'DM the Bot',
-    description: 'Send your verification code to @PESU-MC#8308 bot [iron-golem] on Discord',
+    description: 'Send your verification code to @PESU-MC bot on Discord',
   },
   {
     number: '05',

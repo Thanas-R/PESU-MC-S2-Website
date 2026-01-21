@@ -142,22 +142,18 @@ export const ServerContentsModal = ({
         duration: 0.2
       }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:backdrop-blur-md" onClick={onClose} />
 
-          {/* Centering wrapper - prevents scroll propagation */}
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-hidden"
-            onClick={(e) => {
-              // Close when clicking the centering wrapper (outside the modal)
-              if (e.target === e.currentTarget) onClose();
-            }}
-          >
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.15 }}
-              className="w-full max-w-4xl max-h-[85vh] bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} exit={{
+        opacity: 0,
+        y: 30
+      }} transition={{
+        duration: 0.15
+      }} className="fixed inset-3 sm:inset-4 md:inset-auto md:inset-x-0 md:inset-y-0 md:m-auto md:w-full md:max-w-4xl md:h-fit md:max-h-[85vh] z-50 bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 shrink-0">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Server Contents</h2>
@@ -330,8 +326,7 @@ export const ServerContentsModal = ({
                   </div>
                 </div>}
             </div>
-            </motion.div>
-          </div>
+          </motion.div>
         </>}
     </AnimatePresence>;
 };

@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Package, Terminal, BookOpen, ExternalLink, Server, Cpu, Network, Gauge } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 interface ServerContentsModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -116,6 +117,14 @@ export const ServerContentsModal = ({
     const saved = localStorage.getItem(LAST_TAB_KEY);
     return saved && tabs.some(t => t.id === saved) ? saved : 'specs';
   });
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Auto-focus content area when modal opens
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      contentRef.current.focus();
+    }
+  }, [isOpen, activeTab]);
 
   // Save tab preference
   useEffect(() => {
@@ -154,12 +163,18 @@ export const ServerContentsModal = ({
         duration: 0.2
       }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:backdrop-blur-md" onClick={onClose} />
 
-          {/* Centering wrapper - prevents scroll propagation */}
+          {/* Centering wrapper - captures all scroll events */}
           <div 
             className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-hidden"
             onClick={(e) => {
               // Close when clicking the centering wrapper (outside the modal)
               if (e.target === e.currentTarget) onClose();
+            }}
+            onWheel={(e) => {
+              // Forward all scroll events to content area
+              if (contentRef.current) {
+                contentRef.current.scrollTop += e.deltaY;
+              }
             }}
           >
             <motion.div 
@@ -187,7 +202,11 @@ export const ServerContentsModal = ({
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-auto p-4 sm:p-6 scrollbar-hide">
+            <div 
+              ref={contentRef}
+              tabIndex={-1}
+              className="flex-1 overflow-auto p-4 sm:p-6 custom-scrollbar focus:outline-none"
+            >
               {/* Specifications Tab */}
               {activeTab === 'specs' && <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
                   {/* Infrastructure Header */}

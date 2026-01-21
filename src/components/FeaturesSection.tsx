@@ -33,8 +33,8 @@ const features = [
   },
   {
     icon: 'Gamepad2',
-    title: 'Proximity Voice',
-    description: 'In-game voice chat for immersive gameplay',
+    title: 'TPA (Teleport)',
+    description: 'Teleport to your friends instantly',
   },
   {
     icon: 'Skull',

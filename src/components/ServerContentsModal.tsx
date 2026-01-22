@@ -54,9 +54,6 @@ const duelsCommands = [{
 }, {
   cmd: '/spec, /spectate',
   desc: 'Spectate an ongoing duel.'
-}, {
-  cmd: '/return, /tpareturn',
-  desc: 'Return to previous location (after duel/TP).'
 }];
 const teamCommands = [{
   cmd: '/team',
@@ -286,32 +283,17 @@ const plugins = [{
   name: 'Anti Combatlog',
   link: 'https://modrinth.com/datapack/anti-combatlog',
   description: 'Prevents players from combat-logging by putting players into a "combat" state for a configurable time after dealing/receiving damage; if they log out while in combat, they are penalized.',
-  commands: [{
-    cmd: '/scoreboard players set .config xv_combat_timer_seconds <seconds>',
-    desc: 'Configure combat timer duration.'
-  }]
+  commands: []
 }, {
   name: 'AuthMe ReReloaded (Fork)',
   link: 'https://modrinth.com/plugin/authmerereloaded',
   description: 'Authentication plugin for offline/cracked servers or extra protection. Prevents unauthenticated players from moving, using inventory, or commands until they register/login. Supports captcha, 2FA/TOTP, and email updates.',
-  commands: [{
-    cmd: '/register <password>',
-    desc: 'Create an account.'
-  }, {
-    cmd: '/login <password>',
-    desc: 'Authenticate to the server.'
-  }, {
-    cmd: '/logout',
-    desc: 'Log out of the server.'
-  }, {
-    cmd: '/changepass <old> <new>',
-    desc: 'Change your password.'
-  }]
+  commands: []
 }, {
   name: 'Better Teams',
   link: 'https://www.spigotmc.org/resources/better-teams.17129/',
   description: 'Allows players to team up, share resources, and compete! Create teams, form alliances, declare enemies, and coordinate with teammates.',
-  commands: teamCommands
+  commands: []
 }, {
   name: 'Chunky',
   link: 'https://modrinth.com/plugin/chunky',
@@ -321,109 +303,52 @@ const plugins = [{
   name: 'Dimension Control',
   link: 'https://modrinth.com/plugin/dimensioncontrol',
   description: 'Lightweight plugin to enable/disable/create/remove custom dimensions (worlds) quickly via commands. Control Nether/End portals access.',
-  commands: [{
-    cmd: '/dimensioncontrol create <name> <type>',
-    desc: 'Create a world (type: NORMAL/NETHER/END).'
-  }, {
-    cmd: '/dimensioncontrol remove <name>',
-    desc: 'Remove a world.'
-  }, {
-    cmd: '/dimensioncontrol toggle <dimension>',
-    desc: 'Enable/disable a dimension.'
-  }]
+  commands: []
 }, {
   name: 'Duels Optimised',
   link: 'https://modrinth.com/plugin/duels-optimised',
   description: 'Allows players to duel with editable kits in various arenas, and see their stats! Challenge others to 1v1 battles.',
-  commands: duelsCommands
+  commands: []
 }, {
   name: 'Lightning Grim Anticheat',
   link: 'https://modrinth.com/plugin/lightning-grim-anticheat',
   description: 'Prevents players from cheating (extra reach, aim, etc). High-precision anticheat fork focused on reach checks and knockback protection with low false positives.',
-  commands: [{
-    cmd: '/grim status',
-    desc: 'Display anticheat status.'
-  }, {
-    cmd: '/grim debug',
-    desc: 'Toggle debug mode.'
-  }]
+  commands: []
 }, {
   name: 'KnockbackSync',
   link: 'https://modrinth.com/plugin/knockbacksync',
   description: "Fixes Minecraft's knockback system which is faulty at higher latencies. Synchronizes knockback so PvP behaves fairly across varying player pings.",
-  commands: [{
-    cmd: '/kbs, /kbsync',
-    desc: 'Display KnockbackSync info/status.'
-  }]
+  commands: []
 }, {
   name: 'LuckPerms',
   link: 'https://modrinth.com/plugin/luckperms',
   description: 'Player permissions management plugin. Industry-standard, full-featured permissions with users/groups, meta, contexts, and web editor.',
-  commands: [{
-    cmd: '/lp user <user> info',
-    desc: 'Show info about a user.'
-  }, {
-    cmd: '/lp user <user> permission set <node> true',
-    desc: 'Grant a permission.'
-  }, {
-    cmd: '/lp group <group> permission set <node> true',
-    desc: 'Set group permission.'
-  }, {
-    cmd: '/lp editor',
-    desc: 'Open the web-based editor.'
-  }]
+  commands: []
 }, {
   name: 'Multiverse-Core',
   link: 'https://modrinth.com/plugin/multiverse-core',
   description: 'Bukkit world management plugin. Create/load/teleport between multiple worlds, manage properties per world.',
-  commands: [{
-    cmd: '/mv create <world> <ENV>',
-    desc: 'Create a world (ENV = NORMAL, NETHER, END).'
-  }, {
-    cmd: '/mv tp <player> <world>',
-    desc: 'Teleport to a world.'
-  }, {
-    cmd: '/mv remove <world>',
-    desc: 'Remove a world.'
-  }]
+  commands: []
 }, {
   name: 'Multiverse-Inventories',
   link: 'https://modrinth.com/plugin/multiverse-inventories',
   description: 'Bukkit cross-world player data management plugin for Multiverse-Core. Separate inventories, health, XP per-world or shared per defined groups.',
-  commands: [{
-    cmd: '/mvinv group',
-    desc: 'Create inventory groups.'
-  }, {
-    cmd: '/mvinv addgroup <world> <group>',
-    desc: 'Assign worlds to shared-inventory groups.'
-  }]
+  commands: []
 }, {
   name: 'SkinsRestorer',
   link: 'https://modrinth.com/plugin/skinsrestorer',
   description: 'Adds the ability to restore/change skins on online/offline mode servers! Lets players change skins via commands.',
-  commands: [{
-    cmd: '/skin <name>',
-    desc: 'Set skin by username.'
-  }, {
-    cmd: '/skin url "<url>"',
-    desc: 'Set skin from a direct URL.'
-  }, {
-    cmd: '/skins',
-    desc: 'View available skins.'
-  }]
+  commands: []
 }, {
   name: 'Tablist Config',
   link: 'https://modrinth.com/plugin/config-tablist',
   description: 'Server player list configuration plugin. Customize the player tab-list with headers, footers, ordering, and placeholders.',
-  commands: [{
-    cmd: '/tab reload',
-    desc: 'Reload tab configuration.'
-  }]
+  commands: []
 }, {
   name: 'Just TPA',
   link: 'https://modrinth.com/plugin/just-tpa',
   description: 'Allows players to send and receive TPA requests. Simple teleport request plugin for basic TPA behavior.',
-  commands: tpaCommands
+  commands: []
 }, {
   name: 'ViaVersion',
   link: 'https://modrinth.com/plugin/viaversion',
@@ -438,33 +363,12 @@ const plugins = [{
   name: 'WorldEdit',
   link: 'https://modrinth.com/plugin/worldedit',
   description: 'Minecraft map editor plugin. In-game selections, copy/paste, brushes, schematics, and scripting for building and mapmaking.',
-  commands: [{
-    cmd: '//wand',
-    desc: 'Get selection wand.'
-  }, {
-    cmd: '//pos1, //pos2',
-    desc: 'Set selection corners.'
-  }, {
-    cmd: '//set <block>',
-    desc: 'Fill selection with block.'
-  }, {
-    cmd: '//copy, //paste',
-    desc: 'Copy/paste selections.'
-  }, {
-    cmd: '//undo',
-    desc: 'Undo last action.'
-  }]
+  commands: []
 }, {
   name: 'WorldGuard',
   link: 'https://modrinth.com/plugin/worldguard',
   description: 'Minecraft region-based feature tweaking plugin in conjunction with WorldEdit. Protect builds, set flags for mob-spawning, fire-spread, PvP.',
-  commands: [{
-    cmd: '/rg define <name>',
-    desc: 'Define a region.'
-  }, {
-    cmd: '/rg flag <region> <flag> <value>',
-    desc: 'Set flags (pvp, build, mobs, fire-spread).'
-  }]
+  commands: []
 }];
 
 // Helper component for command blocks

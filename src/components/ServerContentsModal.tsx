@@ -623,7 +623,7 @@ export const ServerContentsModal = ({
                           <p className="text-foreground text-sm font-medium">Clean, Branded Server Address</p>
                         </div>
                         <div className="p-3 bg-green-500/20 border border-green-500/30 rounded-xl">
-                          <p className="text-green-400 text-sm font-bold">Ever Lowest Ping (<30ms)</p>
+                          <p className="text-green-400 text-sm font-bold">Ever Lowest Ping (&lt;30ms)</p>
                         </div>
                       </div>
                     </div>

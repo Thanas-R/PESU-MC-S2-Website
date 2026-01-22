@@ -32,9 +32,9 @@ const features = [
     description: 'Real-time chat synchronization via DiscordSRV',
   },
   {
-    icon: 'Gamepad2',
-    title: 'TPA (Teleport)',
-    description: 'Teleport to your friends instantly',
+    icon: 'Mic',
+    title: 'Proximity Voice',
+    description: 'In-game voice chat for immerisive gameplay',
   },
   {
     icon: 'Skull',

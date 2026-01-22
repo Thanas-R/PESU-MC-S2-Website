@@ -474,10 +474,7 @@ const CommandBlock = ({
 }: {
   cmd: string;
   desc: string;
-}) => <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-2 px-3 rounded-lg bg-white/8 border border-white/5">
-    <code className="text-foreground font-mono text-xs sm:text-sm shrink-0">{cmd}</code>
-    <span className="text-muted-foreground text-xs sm:text-sm">{desc}</span>
-  </div>;
+}) => {};
 
 // Helper component for help note
 const HelpNote = () => <div className="bg-white/10 border border-white/15 p-3 sm:p-4 rounded-xl text-center backdrop-blur-sm">

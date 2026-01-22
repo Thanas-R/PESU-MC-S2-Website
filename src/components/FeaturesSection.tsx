@@ -32,7 +32,7 @@ const features = [
     description: 'Real-time chat synchronization via DiscordSRV',
   },
   {
-    icon: 'Mic',
+    icon: 'Gamepad2',
     title: 'Proximity Voice',
     description: 'In-game voice chat for immerisive gameplay',
   },

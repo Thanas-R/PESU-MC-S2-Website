@@ -1,29 +1,21 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Package, Terminal, BookOpen, ExternalLink, Server, Cpu, Network, Gauge } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import alternateEyeRecipe from '@/assets/datapacks/alternate-eye-recipe.png';
 
 interface ServerContentsModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
 const LAST_TAB_KEY = 'server_contents_last_tab';
-const tabs = [{
-  id: 'specs',
-  label: 'Specifications',
-  icon: Server
-}, {
-  id: 'datapacks',
-  label: 'Datapacks',
-  icon: Package
-}, {
-  id: 'plugins',
-  label: 'Plugins',
-  icon: BookOpen
-}, {
-  id: 'commands',
-  label: 'Commands',
-  icon: Terminal
-}];
+
+const tabs = [
+  { id: 'specs', label: 'Specifications', icon: Server },
+  { id: 'commands', label: 'Commands', icon: Terminal },
+  { id: 'datapacks', label: 'Datapacks', icon: Package },
+  { id: 'plugins', label: 'Plugins', icon: BookOpen },
+];
 
 // Commands organized by category - TPA, Duels, Better Teams first
 const tpaCommands = [
@@ -108,8 +100,117 @@ const skinsCommands = [
   { cmd: '/skins', desc: 'View / change skins with SkinsRestorer.' },
 ];
 
-// Plugins data
+// Datapacks data - Player-focused descriptions
+const datapacks = [
+  {
+    name: 'Alternate Eye of Ender',
+    link: 'https://modrinth.com/datapack/alternate-eye-of-ender',
+    image: alternateEyeRecipe,
+    description: "Reaching the End is no longer a quick grind. You'll need to explore ocean monuments, ancient cities, and more to gather rare materials for crafting a true Eye of Ender.",
+    details: 'Gather Ender Pearls, Blaze Powder, Prismarine Shards, Echo Shards, and Wind Charges — the journey to the End is now an adventure across multiple biomes and dimensions.',
+  },
+  {
+    name: 'Player Head Drops',
+    link: 'https://vanillatweaks.net/picker/datapacks/',
+    description: 'Kill another player in PvP and claim their head as a trophy! Collect heads of your rivals and display your victories.',
+    details: 'Each dropped head shows the player\'s skin and name — perfect for decorating your base or flexing your PvP skills.',
+  },
+  {
+    name: 'Player Graves',
+    link: 'https://modrinth.com/datapack/player-graves',
+    description: 'Don\'t panic when you die! Your items are safely stored in a grave at your death location. Just find it and click to retrieve everything.',
+    details: 'Your grave keeps your inventory and XP safe until you return. No more losing everything to lava or a creeper ambush.',
+  },
+  {
+    name: 'Terralith',
+    link: 'https://modrinth.com/datapack/terralith',
+    description: 'Explore over 100 stunning new biomes! From towering sakura groves to volcanic wastelands, the world is packed with breathtaking landscapes.',
+    details: 'Every journey feels fresh with unique terrain, hidden valleys, and beautiful vistas waiting to be discovered.',
+  },
+  {
+    name: 'Tectonic',
+    link: 'https://modrinth.com/datapack/tectonic',
+    description: 'Prepare for epic terrain! Massive mountains, deep valleys, and dramatic cliffs make exploration feel truly adventurous.',
+    details: 'Build your base on a towering peak or carve into dramatic canyon walls — the world is your playground.',
+  },
+  {
+    name: 'Terratonic',
+    link: 'https://modrinth.com/datapack/terratonic',
+    description: 'The best of both worlds — epic Tectonic terrain combined with Terralith\'s beautiful biomes for the ultimate exploration experience.',
+  },
+  {
+    name: 'Amplified Nether',
+    link: 'https://modrinth.com/datapack/amplified-nether',
+    description: 'The Nether just got way more intense! Towering cliffs, massive caves, and dramatic vertical terrain await.',
+    details: 'Navigate treacherous heights and discover hidden pockets of resources in this amplified hellscape.',
+  },
+  {
+    name: 'Nullscape',
+    link: 'https://modrinth.com/datapack/nullscape',
+    description: 'The End dimension reimagined! Explore surreal floating islands, alien landscapes, and mysterious new terrain.',
+    details: 'After defeating the dragon, there\'s so much more to discover in this hauntingly beautiful void.',
+  },
+  {
+    name: 'Dungeons and Taverns',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns',
+    description: 'Discover hundreds of new structures across all dimensions! From cozy taverns to dangerous dungeons, every exploration trip brings surprises.',
+    details: 'Find hidden loot, battle new challenges, and stumble upon unique builds scattered throughout the world.',
+  },
+  {
+    name: 'DnT Ancient City Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-ancient-city-overhaul',
+    description: 'Ancient Cities are now massive underground labyrinths with better loot, new puzzles, and even more danger. Worth the risk?',
+  },
+  {
+    name: 'DnT Stronghold Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-stronghold-overhaul',
+    description: 'Strongholds are now sprawling dungeons with hundreds of unique rooms, secret passages, and much better loot. Finding the portal is just the beginning.',
+  },
+  {
+    name: 'DnT Pillager Outpost Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-pillager-outpost-overhaul',
+    description: 'Pillager outposts come in many new designs with better loot. Raid them all and claim their treasures!',
+  },
+  {
+    name: 'DnT Swamp Hut Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-swamp-hut-overhaul',
+    description: 'Witch huts are now atmospheric cottages with brewing supplies, hidden chests, and creepy decorations.',
+  },
+  {
+    name: 'DnT Woodland Mansion Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-woodland-mansion-overhaul',
+    description: 'Mansions are now true multi-floor dungeons with dozens of unique rooms, secret areas, and incredible loot. Bring your best gear!',
+  },
+  {
+    name: 'DnT Ocean Monument Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-ocean-monument-overhaul',
+    description: 'Ocean monuments feature randomized interiors with more rooms, better loot, and new challenges for underwater explorers.',
+  },
+  {
+    name: 'DnT Jungle Temple Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-jungle-temple-overhaul',
+    description: 'Jungle temples now have multiple variants with new traps, archaeology secrets, and rewarding treasure.',
+  },
+  {
+    name: 'DnT Desert Temple Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-desert-temple-overhaul',
+    description: 'Desert temples come in new designs with buried archaeology rooms and reimagined trap mechanics. Watch your step!',
+  },
+  {
+    name: 'DnT Nether Fortress Overhaul',
+    link: 'https://modrinth.com/datapack/dungeons-and-taverns-nether-fortress-overhaul',
+    description: 'Nether fortresses are now more dangerous and rewarding with guaranteed spawners, richer rooms, and better loot.',
+  },
+];
+
+// Plugins data - Simple Voice Chat FIRST
 const plugins = [
+  {
+    name: 'Simple Voice Chat',
+    link: 'https://modrinth.com/plugin/simple-voice-chat',
+    description: 'Adds voice proximity chat to Minecraft, provided the mod is installed client-side. Players talk to nearby players in-game.',
+    commands: [],
+  },
   {
     name: 'Anti Combatlog',
     link: 'https://modrinth.com/datapack/anti-combatlog',
@@ -232,12 +333,6 @@ const plugins = [
     name: 'ViaVersion',
     link: 'https://modrinth.com/plugin/viaversion',
     description: 'Allows newer clients to connect to older servers. Compatibility layer letting multiple client versions on a single server.',
-    commands: [],
-  },
-  {
-    name: 'Simple Voice Chat',
-    link: 'https://modrinth.com/plugin/simple-voice-chat',
-    description: 'Adds voice proximity chat to Minecraft, provided the mod is installed client-side. Players talk to nearby players in-game.',
     commands: [],
   },
   {
@@ -466,17 +561,7 @@ export const ServerContentsModal = ({
                   </div>
                 )}
 
-                {activeTab === 'datapacks' && (
-                  <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
-                    <div className="text-center py-12 sm:py-16">
-                      <Package className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-muted-foreground mb-4" />
-                      <h3 className="text-lg sm:text-xl font-semibold mb-2">Coming Soon</h3>
-                      <p className="text-muted-foreground text-sm sm:text-base">Datapack documentation is being prepared.</p>
-                    </div>
-                    <HelpNote />
-                  </div>
-                )}
-
+                {/* Commands Tab */}
                 {activeTab === 'commands' && (
                   <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
                     {/* Just TPA - First */}
@@ -583,6 +668,49 @@ export const ServerContentsModal = ({
                   </div>
                 )}
 
+                {/* Datapacks Tab */}
+                {activeTab === 'datapacks' && (
+                  <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
+                    {datapacks.map((datapack) => (
+                      <div key={datapack.name} className="bg-white/10 border border-white/15 p-4 sm:p-6 rounded-2xl backdrop-blur-sm">
+                        <div className="mb-4">
+                          <a
+                            href={datapack.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-lg sm:text-xl font-bold text-foreground hover:text-muted-foreground transition-colors"
+                          >
+                            {datapack.name}
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                          <p className="text-muted-foreground mt-2 text-sm sm:text-base">
+                            {datapack.description}
+                          </p>
+                        </div>
+                        
+                        {datapack.image && (
+                          <div className="mb-4">
+                            <img 
+                              src={datapack.image} 
+                              alt={`${datapack.name} recipe`}
+                              className="w-auto max-w-[200px] h-auto rounded-lg border border-white/10"
+                            />
+                          </div>
+                        )}
+
+                        {datapack.details && (
+                          <p className="text-muted-foreground text-xs sm:text-sm">
+                            {datapack.details}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+
+                    <HelpNote />
+                  </div>
+                )}
+
+                {/* Plugins Tab */}
                 {activeTab === 'plugins' && (
                   <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
                     {plugins.map((plugin) => (

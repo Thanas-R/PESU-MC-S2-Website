@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import confetti from 'canvas-confetti';
+import { useState, useEffect } from 'react';
 
 interface TimeLeft {
   days: number;
@@ -14,7 +13,6 @@ const TARGET_DATE = new Date('2026-01-23T18:00:00+05:30').getTime();
 export const CountdownBanner = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isLive, setIsLive] = useState(false);
-  const hasTriggeredConfetti = useRef(false);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -22,7 +20,8 @@ export const CountdownBanner = () => {
       const difference = TARGET_DATE - now;
 
       if (difference <= 0) {
-        return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+        setIsLive(true);
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
       }
 
       return {
@@ -30,69 +29,19 @@ export const CountdownBanner = () => {
         hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        expired: false,
       };
     };
 
     // Initial calculation
-    const initial = calculateTimeLeft();
-    if (initial.expired) {
-      setIsLive(true);
-    } else {
-      setTimeLeft(initial);
-    }
+    setTimeLeft(calculateTimeLeft());
 
     // Update every second
     const timer = setInterval(() => {
-      const result = calculateTimeLeft();
-      if (result.expired) {
-        setIsLive(true);
-        clearInterval(timer);
-        
-        // Trigger confetti animation on transition
-        if (!hasTriggeredConfetti.current) {
-          hasTriggeredConfetti.current = true;
-          triggerConfetti();
-        }
-      } else {
-        setTimeLeft(result);
-      }
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
-
-  const triggerConfetti = () => {
-    const duration = 5000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
-
-    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
-
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      const particleCount = 50 * (timeLeft / duration);
-
-      // Launch confetti from both sides
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-        colors: ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#ffffff'],
-      });
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-        colors: ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#ffffff'],
-      });
-    }, 250);
-  };
 
   if (isLive) {
     return (

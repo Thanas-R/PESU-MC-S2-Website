@@ -8,7 +8,7 @@ interface TimeLeft {
 }
 
 // Target: January 23rd, 2026 at 6:00 PM IST (UTC+5:30)
-const TARGET_DATE = new Date('2026-01-22T08:03:00+05:30').getTime();
+const TARGET_DATE = new Date('2026-01-22T08:04:00+05:30').getTime();
 
 export const CountdownBanner = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });

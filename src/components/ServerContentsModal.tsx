@@ -202,11 +202,6 @@ const datapacks = [{
   description: 'Kill another player in PvP and claim their head as a trophy! Collect heads of your rivals and display your victories.',
   details: 'Each dropped head shows the player\'s skin and name — perfect for decorating your base or flexing your PvP skills.'
 }, {
-  name: 'Player Graves',
-  link: 'https://modrinth.com/datapack/player-graves',
-  description: 'Don\'t panic when you die! Your items are safely stored in a grave at your death location. Just find it and click to retrieve everything.',
-  details: 'Your grave keeps your inventory and XP safe until you return. No more losing everything to lava or a creeper ambush.'
-}, {
   name: 'Terralith',
   link: 'https://modrinth.com/datapack/terralith',
   description: 'Explore over 100 stunning new biomes! From towering sakura groves to volcanic wastelands, the world is packed with breathtaking landscapes.',

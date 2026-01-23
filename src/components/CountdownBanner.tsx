@@ -369,17 +369,13 @@ export const CountdownBanner = () => {
             {particles.map(renderParticle)}
           </div>
         )}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-500 py-2 px-4 shadow-lg shadow-emerald-500/30">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-emerald-500/90 backdrop-blur-sm py-2 px-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="relative flex h-3 w-3">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            <span className="text-white font-bold text-sm tracking-wide">🎉 Season 2 is LIVE! 🎉</span>
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-            </span>
+            <span className="text-white font-semibold text-sm">Season 2 is LIVE!</span>
           </div>
         </div>
       </>

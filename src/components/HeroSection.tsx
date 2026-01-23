@@ -20,21 +20,37 @@ export const HeroSection = ({
   // Real-time server status from API
   const { isOnline, playerCount, maxPlayers, isLoading } = useServerStatus();
 
+  /* ---------- Single source of truth for display ---------- */
+  const statusText = isLoading ? 'Checking…' : isOnline ? 'Online' : 'Offline';
+
+  const statusStyles = isLoading
+    ? 'bg-gray-500/20 border-gray-500/40 text-gray-400'
+    : isOnline
+    ? 'bg-green-500/20 border-green-500/40 text-green-400'
+    : 'bg-red-500/20 border-red-500/40 text-red-400';
+
+  const dotStyles = isLoading
+    ? 'bg-gray-400'
+    : isOnline
+    ? 'bg-green-400 animate-pulse'
+    : 'bg-red-400';
+
+  /* ---------- Copy IP handler ---------- */
   const handleCopyIP = async () => {
     try {
       await navigator.clipboard.writeText(serverIP);
       setCopied(true);
       toast({
-        title: "IP Copied!",
+        title: 'IP Copied!',
         description: `${serverIP} has been copied to your clipboard.`,
         duration: 2000
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast({
-        title: "Failed to copy",
-        description: "Please copy manually: " + serverIP,
-        variant: "destructive",
+        title: 'Failed to copy',
+        description: 'Please copy manually: ' + serverIP,
+        variant: 'destructive',
         duration: 2000
       });
     }
@@ -51,26 +67,25 @@ export const HeroSection = ({
           className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
         >
           {/* Server Status with transition animation */}
-          <motion.div 
-            key={isOnline ? 'online' : 'offline'}
+          <motion.div
+            // include statusText in key so motion re-runs animation when status changes (including loading -> online)
+            key={`status-${statusText}`}
             initial={{ scale: 0.95, opacity: 0.8 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all duration-500 ${
-              isOnline 
-                ? 'bg-green-500/20 border-green-500/40 text-green-400' 
-                : 'bg-red-500/20 border-red-500/40 text-red-400'
-            }`}
+            className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all duration-500 ${statusStyles}`}
+            aria-live="polite"
+            role="status"
           >
-            <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+            <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${dotStyles}`} />
             <span className="font-semibold text-sm sm:text-base">
-              Server {isOnline ? 'Online' : 'Offline'}
+              Server {statusText}
             </span>
           </motion.div>
 
           {/* Player Count with transition animation */}
-          <motion.div 
-            key={`${playerCount}-${maxPlayers}`}
+          <motion.div
+            key={`players-${playerCount}-${maxPlayers}`}
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.2 }}
@@ -78,7 +93,7 @@ export const HeroSection = ({
           >
             <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
             <span className="text-foreground font-semibold text-sm sm:text-base">
-              {playerCount}/{maxPlayers} Players
+              {isLoading ? '—/—' : `${playerCount}/${maxPlayers}`} Players
             </span>
           </motion.div>
         </motion.div>
@@ -114,6 +129,7 @@ export const HeroSection = ({
           <button
             onClick={handleCopyIP}
             className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer transition-colors duration-200 hover:border-white/25"
+            aria-label={`Copy server IP ${serverIP}`}
           >
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2 flex items-center justify-center sm:justify-start gap-2">
               IP Address

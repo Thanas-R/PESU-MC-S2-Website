@@ -8,7 +8,7 @@ interface ServerStatus {
 }
 
 const SERVER_ADDRESS = 'pesu-mc.ddns.net';
-const API_URL = `https://api.mcsrvstat.us/3/${SERVER_ADDRESS}`;
+const API_URL = `https://api.mcstatus.io/v2/status/java/${SERVER_ADDRESS}`;
 
 // Store the last known maxPlayers globally to persist between offline states
 let lastKnownMaxPlayers = 20;

@@ -150,15 +150,16 @@ export const NavigationMenu = ({
                     Join Discord
                   </motion.a>
 
-                  {/* Server Status Widget - real-time with animation */}
+                  {/* Server Status Widget - HIDDEN ON MOBILE (visible sm+) */}
                   <motion.div
                     key={`nav-status-${statusText}`}
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ delay: 0.3, duration: 0.3 }}
-                    className={`inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border transition-all duration-500 ${statusStyles}`}
+                    className={`hidden sm:inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border transition-all duration-500 ${statusStyles}`}
                     role="status"
                     aria-live="polite"
+                    aria-hidden={isLoading ? false : undefined}
                   >
                     <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${dotStyles}`} />
                     <div className="flex flex-col leading-tight">

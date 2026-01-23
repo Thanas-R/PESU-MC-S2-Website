@@ -8,9 +8,9 @@ interface ServerStatus {
 }
 
 const SERVER_ADDRESS = 'pesu-mc.ddns.net';
-const API_URL = `https://api.mcsrvstat.us/3/pesu-mc.ddns.net`;
+const API_URL = `https://api.mcsrvstat.us/3/${SERVER_ADDRESS}`;
 
-// Store the last known maxPlayers globally to persist between offline states
+// Persist last known maxPlayers across offline / API errors
 let lastKnownMaxPlayers = 20;
 
 export const useServerStatus = (): ServerStatus => {
@@ -20,7 +20,7 @@ export const useServerStatus = (): ServerStatus => {
     maxPlayers: lastKnownMaxPlayers,
     isLoading: true,
   });
-  
+
   const previousOnline = useRef<boolean | null>(null);
 
   useEffect(() => {
@@ -30,52 +30,46 @@ export const useServerStatus = (): ServerStatus => {
           headers: {
             'User-Agent': 'PESU-Minecraft-Website/1.0',
           },
+          cache: 'no-store', // avoid stale cache when possible
         });
-        
+
         if (!response.ok) {
-          throw new Error('Failed to fetch server status');
+          throw new Error(`HTTP ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
-        const isOnline = data.online ?? false;
-        const playerCount = data.players?.online ?? 0;
-        
-        // Update lastKnownMaxPlayers only when server is online
-        if (isOnline && data.players?.max) {
+
+        // IMPORTANT: trust ONLY data.online
+        const isOnline = data?.online === true;
+        const playerCount = isOnline ? data.players?.online ?? 0 : 0;
+
+        // Update maxPlayers only when server is confirmed online
+        if (isOnline && typeof data.players?.max === 'number') {
           lastKnownMaxPlayers = data.players.max;
         }
-        
-        const newStatus = {
-          isOnline,
-          playerCount: isOnline ? playerCount : 0,
-          maxPlayers: lastKnownMaxPlayers,
-          isLoading: false,
-        };
-        
-        // Check if status changed for animation trigger
-        if (previousOnline.current !== null && previousOnline.current !== isOnline) {
-          // Status changed - this will trigger re-render with new values
-        }
-        previousOnline.current = isOnline;
-        
-        setStatus(newStatus);
-      } catch (error) {
-        console.error('Error fetching server status:', error);
+
         setStatus({
-          isOnline: false,
-          playerCount: 0,
+          isOnline,
+          playerCount,
           maxPlayers: lastKnownMaxPlayers,
           isLoading: false,
         });
+
+        previousOnline.current = isOnline;
+      } catch (error) {
+        console.error('Server status fetch failed:', error);
+
+        // DO NOT force offline on API failure
+        setStatus(prev => ({
+          ...prev,
+          isLoading: false,
+        }));
       }
     };
 
     fetchStatus();
-    
-    // Refresh every 30 seconds for more responsive updates
+
     const interval = setInterval(fetchStatus, 30000);
-    
     return () => clearInterval(interval);
   }, []);
 

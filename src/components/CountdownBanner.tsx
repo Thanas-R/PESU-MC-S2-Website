@@ -9,7 +9,7 @@ interface TimeLeft {
 }
 
 // Target: January 23rd, 2026 at 6:00 PM IST (UTC+5:30)
-const TARGET_DATE = new Date('2026-01-23T10:09:00+05:30').getTime();
+const TARGET_DATE = new Date('2026-01-23T18:00:00+05:30').getTime();
 const CELEBRATION_SHOWN_KEY = 'pesu_celebration_shown';
 
 export const CountdownBanner = () => {

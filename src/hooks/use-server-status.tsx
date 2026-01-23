@@ -10,12 +10,13 @@ interface ServerStatus {
 const SERVER_ADDRESS = 'pesu-mc.ddns.net';
 const API_URL = `https://api.mcsrvstat.us/3/${SERVER_ADDRESS}`;
 
-// Persist last known maxPlayers across offline / API errors
+// Persist last known values
 let lastKnownMaxPlayers = 20;
+let lastKnownOnline = false;
 
 export const useServerStatus = (): ServerStatus => {
   const [status, setStatus] = useState<ServerStatus>({
-    isOnline: false,
+    isOnline: lastKnownOnline,
     playerCount: 0,
     maxPlayers: lastKnownMaxPlayers,
     isLoading: true,
@@ -30,7 +31,7 @@ export const useServerStatus = (): ServerStatus => {
           headers: {
             'User-Agent': 'PESU-Minecraft-Website/1.0',
           },
-          cache: 'no-store', // avoid stale cache when possible
+          cache: 'no-store',
         });
 
         if (!response.ok) {
@@ -39,36 +40,39 @@ export const useServerStatus = (): ServerStatus => {
 
         const data = await response.json();
 
-        // IMPORTANT: trust ONLY data.online
-        const isOnline = data?.online === true;
-        const playerCount = isOnline ? data.players?.online ?? 0 : 0;
+        // Trust ONLY this field
+        const apiOnline = data?.online === true;
 
-        // Update maxPlayers only when server is confirmed online
-        if (isOnline && typeof data.players?.max === 'number') {
+        // Update last known ONLINE state only when explicitly provided
+        lastKnownOnline = apiOnline;
+
+        const playerCount = apiOnline ? data.players?.online ?? 0 : 0;
+
+        if (apiOnline && typeof data.players?.max === 'number') {
           lastKnownMaxPlayers = data.players.max;
         }
 
         setStatus({
-          isOnline,
+          isOnline: lastKnownOnline,
           playerCount,
           maxPlayers: lastKnownMaxPlayers,
           isLoading: false,
         });
 
-        previousOnline.current = isOnline;
+        previousOnline.current = apiOnline;
       } catch (error) {
         console.error('Server status fetch failed:', error);
 
-        // DO NOT force offline on API failure
+        // DO NOT flip to offline on error
         setStatus(prev => ({
           ...prev,
+          isOnline: lastKnownOnline,
           isLoading: false,
         }));
       }
     };
 
     fetchStatus();
-
     const interval = setInterval(fetchStatus, 30000);
     return () => clearInterval(interval);
   }, []);

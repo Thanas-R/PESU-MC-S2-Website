@@ -10,20 +10,17 @@ import { GallerySection } from '@/components/GallerySection';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { TrailerPopup } from '@/components/TrailerPopup';
 import { CountdownBanner } from '@/components/CountdownBanner';
-import { CelebrationOverlay } from '@/components/CelebrationOverlay';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import heroBg from '@/assets/hero-bg.png';
 import serverIcon from '@/assets/server-icon.png';
 
 const TRAILER_SHOWN_KEY = 'pesu_trailer_shown';
-const TRAILER_CELEBRATION_SHOWN_KEY = 'pesu_trailer_celebration_shown';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServerContentsOpen, setIsServerContentsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
-  const [showTrailerCelebration, setShowTrailerCelebration] = useState(false);
 
   // Smooth scroll only on desktop
   useSmoothScroll();
@@ -65,24 +62,11 @@ const Index = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Handle trailer close - trigger celebration on first close
-  const handleTrailerClose = () => {
-    setIsTrailerOpen(false);
-    // Show celebration after closing trailer for the first time
-    const hasSeenCelebration = sessionStorage.getItem(TRAILER_CELEBRATION_SHOWN_KEY);
-    if (!hasSeenCelebration) {
-      setTimeout(() => {
-        setShowTrailerCelebration(true);
-        sessionStorage.setItem(TRAILER_CELEBRATION_SHOWN_KEY, 'true');
-      }, 300);
-    }
-  };
-
   // Handle ESC key to close trailer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isTrailerOpen) {
-        handleTrailerClose();
+        setIsTrailerOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -111,13 +95,7 @@ const Index = () => {
       {/* Trailer Popup */}
       <TrailerPopup 
         isOpen={isTrailerOpen} 
-        onClose={handleTrailerClose} 
-      />
-
-      {/* Celebration after closing trailer */}
-      <CelebrationOverlay 
-        show={showTrailerCelebration} 
-        onComplete={() => setShowTrailerCelebration(false)} 
+        onClose={() => setIsTrailerOpen(false)} 
       />
 
       {/* Fixed Background - no blur */}

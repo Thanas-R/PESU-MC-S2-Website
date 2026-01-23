@@ -540,7 +540,7 @@ export const ServerContentsModal = ({
                       <div className="space-y-2 text-muted-foreground text-sm sm:text-base">
                         <p>• Idle detection & automated scaling policies</p>
                         <p>• Resources used efficiently, not recklessly</p>
-                        <p>Crafty Controller<strong className="text-foreground"></strong> : Insane Dashboard for moderation</p>
+                        <p>• Crafty Controller<strong className="text-foreground"></strong> : Insane Dashboard for moderation</p>
                       </div>
                     </div>
 

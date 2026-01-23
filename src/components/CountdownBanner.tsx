@@ -25,7 +25,7 @@ interface Particle {
 }
 
 // Target: January 23rd, 2026 at 6:00 PM IST (UTC+5:30)
-const TARGET_DATE = new Date('2026-01-23T15:34:00+05:30').getTime();
+const TARGET_DATE = new Date('2026-01-23T18:00:00+05:30').getTime();
 
 const CONFETTI_COLORS = [
   '#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA',

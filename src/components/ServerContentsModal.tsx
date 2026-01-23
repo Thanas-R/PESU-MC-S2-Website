@@ -489,7 +489,7 @@ export const ServerContentsModal = ({
                       </div>
                       <div className="mt-4 p-3 sm:p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
                         <p className="text-sm text-yellow-200/90">
-                          While most university servers run on repurposed desktops or bargain VPS nodes (which lags with just 5 ppl), this server operates on cloud-native, production-class architecture designed for high-throughput, low-latency workloads.
+                          While most university servers run on repurposed desktops or bargain VPS nodes (which lags with just 5 people), this server operates on cloud-native, production-class architecture designed for high-throughput, low-latency workloads.
                         </p>
                       </div>
                     </div>
@@ -540,7 +540,7 @@ export const ServerContentsModal = ({
                       <div className="space-y-2 text-muted-foreground text-sm sm:text-base">
                         <p>• Idle detection & automated scaling policies</p>
                         <p>• Resources used efficiently, not recklessly</p>
-                        <p>Crafty Controller<strong className="text-foreground">Craft Controller</strong> : Insane Dashboard for moderation</p>
+                        <p>Crafty Controller<strong className="text-foreground"></strong> : Insane Dashboard for moderation</p>
                       </div>
                     </div>
 

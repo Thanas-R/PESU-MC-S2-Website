@@ -25,7 +25,7 @@ interface Particle {
 }
 
 // Target: January 23rd, 2026 at 6:00 PM IST (UTC+5:30)
-const TARGET_DATE = new Date('2026-01-23T15:00:00+05:30').getTime();
+const TARGET_DATE = new Date('2026-01-23T18:00:00+05:30').getTime();
 
 const CONFETTI_COLORS = [
   '#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA',
@@ -371,13 +371,7 @@ export const CountdownBanner = () => {
         )}
         <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-500 py-2 px-4 shadow-lg shadow-emerald-500/30">
           <div className="flex items-center justify-center gap-2">
-            <span className="relative flex h-3 w-3">
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-            </span>
             <span className="text-white font-bold text-sm tracking-wide"> Season 2 is LIVE! </span>
-            <span className="relative flex h-3 w-3">
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-            </span>
           </div>
         </div>
       </>

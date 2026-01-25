@@ -9,12 +9,9 @@ import { HowToJoinSection } from '@/components/HowToJoinSection';
 import { GallerySection } from '@/components/GallerySection';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { TrailerPopup } from '@/components/TrailerPopup';
-import { CountdownBanner } from '@/components/CountdownBanner';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import heroBg from '@/assets/hero-bg.png';
 import serverIcon from '@/assets/server-icon.png';
-
-const TRAILER_SHOWN_KEY = 'pesu_trailer_shown';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,15 +31,6 @@ const Index = () => {
       loadedCount++;
       if (loadedCount >= imagesToLoad.length) {
         setIsLoading(false);
-        
-        // Show trailer popup on first visit after loading completes
-        const hasSeenTrailer = sessionStorage.getItem(TRAILER_SHOWN_KEY);
-        if (!hasSeenTrailer) {
-          setTimeout(() => {
-            setIsTrailerOpen(true);
-            sessionStorage.setItem(TRAILER_SHOWN_KEY, 'true');
-          }, 500);
-        }
       }
     };
 
@@ -62,17 +50,6 @@ const Index = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Handle ESC key to close trailer
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isTrailerOpen) {
-        setIsTrailerOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isTrailerOpen]);
-
   const handleNavigate = (section: string) => {
     const element = document.getElementById(section);
     if (element) {
@@ -88,9 +65,6 @@ const Index = () => {
       <AnimatePresence>
         {isLoading && <LoadingScreen isLoading={isLoading} />}
       </AnimatePresence>
-
-      {/* Countdown Banner */}
-      <CountdownBanner />
 
       {/* Trailer Popup */}
       <TrailerPopup 

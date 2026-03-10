@@ -4,7 +4,6 @@
 
 Official landing page for the student-run PESU Minecraft Server — Season 2. This site presents server information, join instructions, launch countdown, community showcases, and media (trailer & gallery).
 
----
 
 # Key Features
 
@@ -17,7 +16,6 @@ Official landing page for the student-run PESU Minecraft Server — Season 2. Th
 * Trailer popup (YouTube) in a `Framer Motion` modal
 * Server Contents modal with plugin/command/spec breakdown
 
----
 
 # Tech Stack
 
@@ -32,7 +30,6 @@ Official landing page for the student-run PESU Minecraft Server — Season 2. Th
 | Routing       | React Router DOM v6                       |
 | State         | React hooks (useState, useEffect, useRef) |
 
----
 
 # Design System
 
@@ -42,7 +39,6 @@ Official landing page for the student-run PESU Minecraft Server — Season 2. Th
 * Brand tokens: `--color-discord`, `--color-emerald`, `--color-orange`
 * Hidden scrollbars globally with a `scrollbar-custom` utility class
 
----
 
 # Getting Started (Developer)
 
@@ -76,7 +72,6 @@ npm run preview
 }
 ```
 
----
 
 # Environment Variables
 
@@ -135,7 +130,6 @@ setInterval(async () => {
 }, 30_000);
 ```
 
----
 
 # Accessibility & Responsiveness
 
@@ -143,13 +137,11 @@ setInterval(async () => {
 * Keyboard-accessible modals and focus trapping via Radix primitives.
 * Alt text for all media and aria labels for interactive controls.
 
----
 
 # Styling / Tailwind tokens
 
 Add custom tokens to `tailwind.config.js` or CSS variables for the brand colors and glassmorphism utilities.
 
----
 
 # Deployment
 
@@ -158,7 +150,6 @@ Any static host supporting SPA fallback will work (Netlify, Vercel, GitHub Pages
 * Ensure `VITE_*` env vars are set in the host's dashboard.
 * Use proper cache headers for images (hero, gallery) to speed up repeat visits.
 
----
 
 # Contributing
 
@@ -168,13 +159,9 @@ Any static host supporting SPA fallback will work (Netlify, Vercel, GitHub Pages
 
 Please follow the existing code style (Prettier + ESLint). Keep animations performant and mobile-friendly.
 
----
 
 # Acknowledgements
 
 * `mcsrvstat` for server status API
 * `Framer Motion`, `shadcn/ui`, `Lenis`
-
----
-
 

@@ -1,4 +1,4 @@
-# PESU Minecraft Server — Season 2 (Official Website)
+# PESU Minecraft Server - Season 2 (Official Website)
 
 **Purpose**
 

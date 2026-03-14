@@ -2,7 +2,7 @@
 
 **Purpose**
 
-Official landing page for the student-run PESU Minecraft Server — Season 2. This site presents server information, join instructions, launch countdown, community showcases, and media (trailer & gallery).
+Official landing page for the student-run PESU Minecraft Server - Season 2. This site presents server information, join instructions, launch countdown, community showcases, and media (trailer & gallery).
 
 
 # Key Features
@@ -85,7 +85,7 @@ VITE_YT_VIDEO_ID=your_youtube_video_id
 ```
 
 * `VITE_API_BASE` — used for polling server status (no auth required for `mcsrvstat`).
-* `VITE_LAUNCH_DATE` — ISO timestamp used by the countdown banner.
+* `VITE_LAUNCH_DATE` - ISO timestamp used by the countdown banner.
 
 ---
 

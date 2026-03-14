@@ -8,19 +8,20 @@ interface ServerStatus {
 }
 
 const SERVER_ADDRESS = 'pesu-mc.ddns.net';
-const API_URL = `https://api.mcstatus.io/v2/status/java/${SERVER_ADDRESS}`;
+const API_URL = `https://api.mcsrvstat.us/3/${SERVER_ADDRESS}`;
 
-// Store the last known maxPlayers globally to persist between offline states
+// Persist last known values
 let lastKnownMaxPlayers = 20;
+let lastKnownOnline = false;
 
 export const useServerStatus = (): ServerStatus => {
   const [status, setStatus] = useState<ServerStatus>({
-    isOnline: false,
+    isOnline: lastKnownOnline,
     playerCount: 0,
     maxPlayers: lastKnownMaxPlayers,
     isLoading: true,
   });
-  
+
   const previousOnline = useRef<boolean | null>(null);
 
   useEffect(() => {
@@ -30,52 +31,49 @@ export const useServerStatus = (): ServerStatus => {
           headers: {
             'User-Agent': 'PESU-Minecraft-Website/1.0',
           },
+          cache: 'no-store',
         });
-        
+
         if (!response.ok) {
-          throw new Error('Failed to fetch server status');
+          throw new Error(`HTTP ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
-        const isOnline = data.online ?? false;
-        const playerCount = data.players?.online ?? 0;
-        
-        // Update lastKnownMaxPlayers only when server is online
-        if (isOnline && data.players?.max) {
+
+        // Trust ONLY this field
+        const apiOnline = data?.online === true;
+
+        // Update last known ONLINE state only when explicitly provided
+        lastKnownOnline = apiOnline;
+
+        const playerCount = apiOnline ? data.players?.online ?? 0 : 0;
+
+        if (apiOnline && typeof data.players?.max === 'number') {
           lastKnownMaxPlayers = data.players.max;
         }
-        
-        const newStatus = {
-          isOnline,
-          playerCount: isOnline ? playerCount : 0,
-          maxPlayers: lastKnownMaxPlayers,
-          isLoading: false,
-        };
-        
-        // Check if status changed for animation trigger
-        if (previousOnline.current !== null && previousOnline.current !== isOnline) {
-          // Status changed - this will trigger re-render with new values
-        }
-        previousOnline.current = isOnline;
-        
-        setStatus(newStatus);
-      } catch (error) {
-        console.error('Error fetching server status:', error);
+
         setStatus({
-          isOnline: false,
-          playerCount: 0,
+          isOnline: lastKnownOnline,
+          playerCount,
           maxPlayers: lastKnownMaxPlayers,
           isLoading: false,
         });
+
+        previousOnline.current = apiOnline;
+      } catch (error) {
+        console.error('Server status fetch failed:', error);
+
+        // DO NOT flip to offline on error
+        setStatus(prev => ({
+          ...prev,
+          isOnline: lastKnownOnline,
+          isLoading: false,
+        }));
       }
     };
 
     fetchStatus();
-    
-    // Refresh every 16 seconds for more responsive updates
-    const interval = setInterval(fetchStatus, 16000);
-    
+    const interval = setInterval(fetchStatus, 30000);
     return () => clearInterval(interval);
   }, []);
 

@@ -17,8 +17,12 @@ export const HeroSection = ({
   const [copied, setCopied] = useState(false);
   const serverIP = 'pesu-mc.ddns.net';
 
-  // Real-time server status from API
-  const { isOnline, playerCount, maxPlayers, isLoading } = useServerStatus();
+  // Call the hook (always) — then safely read values with defaults
+  const serverStatus = useServerStatus();
+  const isOnline = serverStatus?.isOnline ?? false;
+  const playerCount = typeof serverStatus?.playerCount === 'number' ? serverStatus!.playerCount : 0;
+  const maxPlayers = typeof serverStatus?.maxPlayers === 'number' ? serverStatus!.maxPlayers : 20;
+  const isLoading = serverStatus?.isLoading ?? true;
 
   const handleCopyIP = async () => {
     try {
@@ -50,35 +54,44 @@ export const HeroSection = ({
           transition={{ duration: 0.4 }}
           className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
         >
-          {/* Server Status with transition animation */}
-          <motion.div 
-            key={isOnline ? 'online' : 'offline'}
+          {/* Server Status with transition animation - HIDDEN ON PHONE */}
+          <motion.div
+            key={isLoading ? 'loading' : isOnline ? 'online' : 'offline'}
             initial={{ scale: 0.95, opacity: 0.8 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all duration-500 ${
-              isOnline 
-                ? 'bg-green-500/20 border-green-500/40 text-green-400' 
+            className={`hidden sm:inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all duration-500 ${
+              isLoading
+                ? 'bg-gray-500/20 border-gray-500/40 text-gray-400'
+                : isOnline
+                ? 'bg-green-500/20 border-green-500/40 text-green-400'
                 : 'bg-red-500/20 border-red-500/40 text-red-400'
             }`}
+            role="status"
+            aria-live="polite"
           >
-            <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+            <span
+              className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${
+                isLoading ? 'bg-gray-400' : isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-400'
+              }`}
+            />
             <span className="font-semibold text-sm sm:text-base">
-              Server {isOnline ? 'Online' : 'Offline'}
+              {isLoading ? 'Checking…' : `Server ${isOnline ? 'Online' : 'Offline'}`}
             </span>
           </motion.div>
 
-          {/* Player Count with transition animation */}
-          <motion.div 
-            key={`${playerCount}-${maxPlayers}`}
+          {/* Player Count with transition animation - HIDDEN ON PHONE */}
+          <motion.div
+            key={`${playerCount}-${maxPlayers}-${isLoading ? 'loading' : 'ready'}`}
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 glass-card rounded-full"
+            className="hidden sm:inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 glass-card rounded-full"
+            aria-hidden={isLoading}
           >
             <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
             <span className="text-foreground font-semibold text-sm sm:text-base">
-              {playerCount}/{maxPlayers} Players
+              {isLoading ? '—/— Players' : `${playerCount}/${maxPlayers} Players`}
             </span>
           </motion.div>
         </motion.div>
@@ -114,6 +127,7 @@ export const HeroSection = ({
           <button
             onClick={handleCopyIP}
             className="glass-card px-6 sm:px-10 py-4 sm:py-6 rounded-2xl group cursor-pointer transition-colors duration-200 hover:border-white/25"
+            aria-label={`Copy server IP ${serverIP}`}
           >
             <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-widest mb-1 sm:mb-2 flex items-center justify-center sm:justify-start gap-2">
               IP Address

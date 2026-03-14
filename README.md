@@ -33,7 +33,7 @@ Official landing page for the student-run PESU Minecraft Server - Season 2. This
 
 # Design System
 
-* Dark theme only — deep blacks (`hsl(0 0% 5%)`) with white foreground
+* Dark theme only - deep blacks (`hsl(0 0% 5%)`) with white foreground
 * Glassmorphism: `backdrop-filter: blur(24px)` cards/buttons with subtle white borders
 * Font: **Poppins** (weights 300–800)
 * Brand tokens: `--color-discord`, `--color-emerald`, `--color-orange`
